@@ -1,0 +1,12 @@
+﻿@page
+@model WebApp.Pages.Task4Model
+@{
+    ViewData["Title"] = "Task4";
+}
+
+<ul>
+    <li><b>Full name:</b> @Model.MyInfo.FullName</li>
+    <li><b>Age:</b> @Model.MyInfo.Age</li>
+    <li><b>Bio:</b> @Model.MyInfo.Bio</li>
+    <li><b>Github:</b> <a href="@Model.MyInfo.Github" target="_blank">@Model.MyInfo.Github</a></li>
+</ul>

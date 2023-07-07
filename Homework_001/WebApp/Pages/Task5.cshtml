@@ -1,0 +1,18 @@
+﻿@page
+@model WebApp.Pages.Task5Model
+@{
+    ViewData["Title"] = "Task5";
+}
+
+
+@if (@Model.CurrentAuthor != null)
+{
+    <h2>@Model.CurrentAuthor.FullName</h2>
+
+    <ul>
+        @foreach (string quote in @Model.CurrentAuthor.Quotes)
+        {
+            <li><em>@quote</em></li>
+        }
+    </ul>
+}
