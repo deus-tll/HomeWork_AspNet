@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\greece.png" />
+    <None Include="wwwroot\images\japan.png" />
+    <None Include="wwwroot\images\uk.png" />
+    <None Include="wwwroot\images\ukraine.png" />
+    <None Include="wwwroot\images\usa.png" />
+  </ItemGroup>
+
+</Project>
