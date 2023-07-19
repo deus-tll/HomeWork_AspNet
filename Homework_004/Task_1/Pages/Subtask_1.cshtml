@@ -1,0 +1,21 @@
+﻿@page
+@model Task_1.Pages.Subtask_1Model
+@{
+    ViewData["Title"] = "Subtask_1";
+}
+
+<h2>Subtask_1</h2>
+<br />
+<p><b>Conditions:</b> @Model.Conditions</p>
+<br />
+
+<div class="pairs-container">
+    <div class="pair">
+        <p class="item-left">Year:</p>
+        <p class="item-right">@Model.Year</p>
+    </div>
+    <div class="pair">
+        <p class="item-left">Is leap:</p>
+        <p class="item-right">@Model.Isleap</p>
+    </div>
+</div>

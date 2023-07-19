@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\info\" />
+    <Folder Include="wwwroot\img\courses\" />
+    <Folder Include="wwwroot\img\portfolio\" />
+  </ItemGroup>
+
+</Project>

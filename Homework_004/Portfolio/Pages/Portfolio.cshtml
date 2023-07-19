@@ -1,0 +1,57 @@
+﻿@page
+@model Portfolio.Pages.PortfolioModel
+@{
+    ViewData["Title"] = "Portfolio";
+}
+
+
+<section id="portfolio" class="portfolio">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>Portfolio</h2>
+            <p>Ось декілька моїх робіт для ознайомлення</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="100">
+            <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="portfolio-flters">
+                    <li data-filter="*" class="filter-active">All</li>
+                    <li data-filter=".filter-brows">Brows</li>
+                    <li data-filter=".filter-lips">Lips</li>
+                    <li data-filter=".filter-eyelids">Eyelids</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+            @if (Model.Files is not null)
+            {
+                @foreach (var file in Model.Files)
+                {
+                    <div class="col-lg-4 col-md-6 portfolio-item mt-4 filter-@file.Type" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="portfolio-wrap my-portfolio-wrap d-flex align-items-stretch rounded-4 scale-up">
+                            @if (file.Ext == ".JPEG")
+                            {
+                                <img src="@file.Path" class="img-fluid" alt="">
+                            }
+                            else if (file.Ext == ".MOV")
+                            {
+                                <video class="w-100" autoplay loop muted>
+                                    <source src="@file.Path" type="video/mp4" />
+                                </video>
+                            }
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>
+
+@*<div class="col-lg-3 col-md-5 d-flex align-items-stretch mt-5" data-aos="zoom-in" data-aos-delay="100">
+    <video class="w-100 rounded-4 scale-up" autoplay loop muted>
+        <source src="~/img/courses/IMG_4201.MOV" type="video/mp4" />
+    </video>
+</div>*@
