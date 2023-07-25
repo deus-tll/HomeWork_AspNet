@@ -2,7 +2,6 @@ using Library.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-//я знаю, що я тут один момент упустив, я дороблю
 namespace Library.Pages
 {
     public class AboutModel : PageModel
