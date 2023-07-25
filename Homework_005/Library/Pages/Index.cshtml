@@ -14,12 +14,9 @@
 
         <div class="row">
             <div class="list-group list-group-light">
-                @if (Model.Comics is not null)
+                @foreach (var comic in Model.Comics)
                 {
-                    @foreach (var comic in Model.Comics)
-                    {
-                        <a href="/About/@comic.Id" class="list-group-item list-group-item-action px-3 border-0 text-center">(@comic.Title)</a>
-                    }
+                    <a href="/About/@comic.Id" class="list-group-item list-group-item-action px-3 border-0 text-center">(@comic.Title)</a>
                 }
             </div>
         </div>
