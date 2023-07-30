@@ -1,0 +1,27 @@
+﻿@page "/DeleteBook/{id}"
+@model Library.Pages.DeleteBookModel
+@{
+    ViewData["Title"] = "Delete Book";
+}
+
+<section class="main-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Delete Book</h2>
+        </div>
+
+        <div class="row">
+            <div class="text-center">
+                <p>Are you sure you want to delete the following book?</p>
+                <p>@Model.Book.Title [by @Model.Book.Author]</p>
+                <p><strong>Description: </strong>@Model.Book.Description</p>
+
+                <form method="post">
+                    <input type="hidden" asp-for="@Model.Book.Id" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-page="/About" asp-route-id="@Model.Book.Id" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
