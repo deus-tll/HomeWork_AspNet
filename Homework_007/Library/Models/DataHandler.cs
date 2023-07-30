@@ -10,8 +10,31 @@ namespace Library.Models
             _context = db;
         }
 
-
         public async Task<List<User>> GetUsersAsync() => await _context.Users.AsNoTracking().ToListAsync();
+
+
+        public async Task<User?> GetUserAsync(int id) => await _context.Users.FindAsync(id);
+
+
+        public async Task AddUserAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+        }
+
+
+        public async Task DeleteUserAsync(User user)
+        {
+            _context.Users.Remove(user);
+            await _context.SaveChangesAsync();
+        }
+
+
+        public async Task UpdateUserAsync(User user)
+        {
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+        }
 
 
         private async Task<List<Book>> GetBooksFromDbAsync() => await _context.Books.AsNoTracking().ToListAsync();
@@ -68,16 +91,24 @@ namespace Library.Models
             await _context.SaveChangesAsync();
         }
 
+
         public async Task DeleteBookAsync(Book book)
         {
             _context.Books.Remove(book);
             await _context.SaveChangesAsync();
         }
 
+
         public async Task UpdateBookAsync(Book book)
         {
             _context.Books.Update(book);
             await _context.SaveChangesAsync();
+        }
+
+
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
         }
     }
 }

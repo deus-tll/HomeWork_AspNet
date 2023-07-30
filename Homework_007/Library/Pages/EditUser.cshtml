@@ -1,0 +1,25 @@
+﻿@page "/EditUser/{id}"
+@model Library.Pages.EditUserModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Edit User</h2>
+        </div>
+
+        <p style="font-size:9pt;">*If you don`t want to change password, just leave field empty.</p>
+
+        <form method="post">
+            <partial name="UserForm" for="MyUser" />
+
+            <div class="text-center pt-3">
+                <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+        </form>
+
+    </div>
+</section>
