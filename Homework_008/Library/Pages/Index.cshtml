@@ -1,0 +1,102 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<form method="post">
+    <div class="row">
+        <div class="col-lg-6">
+            <label for="title">Title:</label>
+            <input class="form-control form-control-sm" type="text" id="title" name="Title" />
+        </div>
+        <div class="col-lg-6">
+            <label for="author">Author:</label>
+            <input class="form-control form-control-sm" type="text" id="author" name="Author" />
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <label for="publisher">Publisher:</label>
+            <input class="form-control form-control-sm" type="text" id="publisher" name="Publisher" />
+        </div>
+        <div class="col-lg-6">
+            <label for="genre">Genre:</label>
+            <input class="form-control form-control-sm" type="text" id="genre" name="Genre" />
+        </div>
+    </div>
+    
+
+    <div class="row">
+        <div class="col-lg-3">
+            <label for="minPageCount">Min Page Count:</label>
+            <input class="form-control form-control-sm" type="number" id="minPageCount" name="MinPageCount" />
+        </div>
+        <div class="col-lg-3">
+            <label for="maxPageCount">Max Page Count:</label>
+            <input class="form-control form-control-sm" type="number" id="maxPageCount" name="MaxPageCount" />
+        </div>
+        <div class="col-lg-3">
+            <label for="minYear">Min Year:</label>
+            <input class="form-control form-control-sm" type="number" id="minYear" name="MinYear" />
+        </div>
+        <div class="col-lg-3">
+            <label for="maxYear">Max Year:</label>
+            <input class="form-control form-control-sm" type="number" id="maxYear" name="MaxYear" />
+        </div>
+    </div>
+    
+
+
+    <div class="row">
+        <div class="col-lg-6">
+            <label for="sortBy">Sort By:</label>
+            <select class="form-control text-center form-control-sm" id="sortBy" name="SortBy">
+                <option value="--None--">--None--</option>
+                <option value="Title">Title</option>
+                <option value="Author">Author</option>
+                <option value="Publisher">Publisher</option>
+            </select>
+        </div>
+        <div class="col-lg-6 text-center">
+            <label for="sortDirection">Sort Direction:</label>
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="radio" id="sortAscending" name="IsSortAscending" value="true" checked />
+                    <label for="sortAscending">Ascending</label>
+                </div>
+                <div class="col-lg-6">
+                    <input type="radio" id="sortDescending" name="IsSortAscending" value="false" />
+                    <label for="sortDescending">Descending</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="text-center pt-5">
+        <button class="btn btn-submit" type="submit">Apply Filters</button>
+    </div>
+</form>
+
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Library Of Books</h2>
+        </div>
+
+        <div class="row">
+            <div class="list-group list-group-light">
+                @foreach (var book in Model.Books)
+                {
+                    <a href="/About/@book.Id" class="list-group-item list-group-item-action px-3 border-0 text-center">@book.Title [by @book.Author]</a>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>

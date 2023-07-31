@@ -1,0 +1,19 @@
+﻿@model Library.Models.User
+
+<div>
+    <label for="nickname">Nickname:</label>
+    <input class="form-control form-control-sm" type="text" id="nickname" name="MyUser.Nickname" asp-for="Nickname" />
+    <span asp-validation-for="Nickname" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="email">Email:</label>
+    <input class="form-control form-control-sm" type="email" id="email" name="MyUser.Email" asp-for="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="password">Password:</label>
+    <input class="form-control form-control-sm" type="password" id="password" name="MyUser.Password" asp-for="Password" />
+    <span asp-validation-for="Password" class="text-danger"></span>
+</div>

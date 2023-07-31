@@ -1,0 +1,47 @@
+﻿@model Library.Models.Book
+
+<div>
+    <label for="title">Title:</label>
+    <input class="form-control form-control-sm" type="text" id="title" name="Book.Title" asp-for="Title" />
+    <span asp-validation-for="Title" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="description">Description:</label>
+    <textarea class="form-control form-control-sm" id="description" name="Book.Description" asp-for="Description"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="author">Author:</label>
+    <input class="form-control form-control-sm" type="text" id="author" name="Book.Author" asp-for="Author" />
+    <span asp-validation-for="Author" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="publisher">Publisher:</label>
+    <input class="form-control form-control-sm" type="text" id="publisher" name="Book.Publisher" asp-for="Publisher" />
+    <span asp-validation-for="Publisher" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="pageCount">Page Count:</label>
+    <input class="form-control form-control-sm" type="number" id="pageCount" name="Book.PageCount" asp-for="PageCount" />
+    <span asp-validation-for="PageCount" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="genre">Genre:</label>
+    <input class="form-control form-control-sm" type="text" id="genre" name="Book.Genre" asp-for="Genre" />
+    <span asp-validation-for="Genre" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="year">Year:</label>
+    <input class="form-control form-control-sm" type="number" id="year" name="Book.Year" asp-for="Year" />
+    <span asp-validation-for="Year" class="text-danger"></span>
+</div>
+
+<div class="text-center pt-5">
+    <button class="btn btn-submit" type="submit">Save</button>
+</div>

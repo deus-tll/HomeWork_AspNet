@@ -1,0 +1,26 @@
+﻿@page "/DeleteUser/{id}"
+@model Library.Pages.DeleteUserModel
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<section class="main-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Delete User</h2>
+        </div>
+
+        <div class="row">
+            <div class="text-center">
+                <p>Are you sure you want to delete this account?</p>
+                <p>@Model.MyUser.Email [@Model.MyUser.Nickname]</p>
+
+                <form method="post">
+                    <input type="hidden" asp-for="@Model.MyUser.Id" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-page="/Users" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

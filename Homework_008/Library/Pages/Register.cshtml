@@ -1,0 +1,23 @@
+﻿@page
+@model Library.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Registration";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>Registration</h2>
+        </div>
+
+        <form method="post">
+            <partial name="UserForm" for="MyUser" />
+
+            <div class="text-center pt-3">
+                <button class="btn btn-primary" type="submit">Register</button>
+            </div>
+        </form>
+
+    </div>
+</section>
