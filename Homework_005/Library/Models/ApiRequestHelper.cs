@@ -78,7 +78,7 @@ namespace Library.Models
             if (comic != null) return comic;
 
             string timeStamp = DateTime.Now.Ticks.ToString();
-            string hash = ApiRequestHelper.GenerateApiHash(timeStamp, _privateKey, _publicKey);
+            string hash = GenerateApiHash(timeStamp, _privateKey, _publicKey);
             string apiUrl = $"http://gateway.marvel.com/v1/public/comics/{id}?ts={timeStamp}&apikey={_publicKey}&hash={hash}";
 
             dynamic? jsonData = await GetJsonDataAsync(apiUrl);
@@ -91,7 +91,7 @@ namespace Library.Models
         public async Task<List<Comic>?> GetComics()
         {
             string timeStamp = DateTime.Now.Ticks.ToString();
-            string hash = ApiRequestHelper.GenerateApiHash(timeStamp, _privateKey, _publicKey);
+            string hash = GenerateApiHash(timeStamp, _privateKey, _publicKey);
             string apiUrl = $"http://gateway.marvel.com/v1/public/comics?ts={timeStamp}&apikey={_publicKey}&hash={hash}&limit={IsLimit()}";
 
             dynamic? jsonData = await GetJsonDataAsync(apiUrl);
@@ -186,7 +186,7 @@ namespace Library.Models
         }
 
 
-        private static async Task<List<Comic>?> DeserializeComics(string filePath)
+        private static async Task<List<Comic>?> DeserializeComicsAsync(string filePath)
         {
             string? jsonData = await File.ReadAllTextAsync(filePath);
             return JsonConvert.DeserializeObject<List<Comic>>(jsonData);
@@ -231,7 +231,7 @@ namespace Library.Models
         public async Task<List<Comic>?> GetCachedComics()
         {
             string filePath = Path.Combine(_wwwroot, _dataFolder, _dataFetchedFile);
-            return await DeserializeComics(filePath);
+            return await DeserializeComicsAsync(filePath);
         }
 
 
