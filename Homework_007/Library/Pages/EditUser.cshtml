@@ -14,6 +14,8 @@
         <p style="font-size:9pt;">*If you don`t want to change password, just leave field empty.</p>
 
         <form method="post">
+            <input type="hidden" name="MyUser.Id" asp-for="MyUser.Id" />
+
             <partial name="UserForm" for="MyUser" />
 
             <div class="text-center pt-3">

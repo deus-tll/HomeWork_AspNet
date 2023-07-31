@@ -12,6 +12,8 @@
         </div>
 
         <form method="post">
+            <input type="hidden" name="Book.Id" asp-for="Book.Id" />
+
             <partial name="BookForm" for="Book" />
         </form>
 
