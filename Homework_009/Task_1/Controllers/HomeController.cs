@@ -12,7 +12,7 @@ namespace Task_1.Controllers
             CurrentMachineOS currentMachineOS = new();
 
             await Response.WriteAsync($"<h2>NAME OF CURRENT SERVER'S OS: {currentMachineOS.OS}</h2>" +
-                $"<h2><strong>VERSION OF CURRENT SERVER'S OS: </strong>{currentMachineOS.OS_Version}</h2>");
+                $"<h2>VERSION OF CURRENT SERVER'S OS: {currentMachineOS.OS_Version}</h2>");
         }
     }
 }
