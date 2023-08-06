@@ -1,0 +1,21 @@
+﻿.list-bullets {
+    list-style: none;
+}
+
+.list-bullets li {
+    display: flex;
+    align-items: center;
+}
+
+.list-bullets li::before {
+    content: '';
+    min-width: 12px;
+    min-height: 12px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ff006e;
+    border: 2px solid #F1D4E5;
+    display: inline-block;
+    margin-right: 1rem;
+}

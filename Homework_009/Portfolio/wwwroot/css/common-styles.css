@@ -1,0 +1,68 @@
+/*--------------------------------------------------------------
+# General for whole site
+--------------------------------------------------------------*/
+a {
+    color: #34b7a7;
+    text-decoration: none;
+    padding: 20px 5px;
+}
+
+a:hover {
+    color: #51cdbe;
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Raleway", sans-serif;
+}
+
+.scale-up:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+}
+
+
+/*--------------------------------------------------------------
+# Section
+--------------------------------------------------------------*/
+section {
+    padding: 60px 0;
+}
+
+.section-bg {
+    background-color: #e7f8f6;
+}
+
+.section-title {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+.section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+}
+
+.section-title h2::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #ff006e;
+    bottom: 0;
+    left: calc(50% - 25px);
+}
+
+.section-title p {
+    margin-bottom: 0;
+}
