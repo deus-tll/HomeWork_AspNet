@@ -15,6 +15,11 @@ namespace Library.Pages
             _dataHandler = new DataHandler(db);
         }
 
+        public IActionResult OnGet()
+        {
+            return Page();
+        }
+
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

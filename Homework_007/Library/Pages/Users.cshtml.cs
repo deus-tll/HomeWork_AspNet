@@ -1,4 +1,5 @@
 using Library.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Library.Pages
@@ -14,9 +15,11 @@ namespace Library.Pages
 
         public required List<User> Users { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             Users = await _dataHandler.GetUsersAsync();
+
+            return Page();
         }
     }
 }

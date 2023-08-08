@@ -1,4 +1,5 @@
 ﻿using Library.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Library.Pages
@@ -16,14 +17,18 @@ namespace Library.Pages
             _dataHandler = new DataHandler(db);
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             Books = await _dataHandler.GetBooksAsync();
+
+            return Page();
         }
 
-        public async Task OnPostAsync()
+        public async Task<IActionResult> OnPostAsync()
         {
             Books = await _dataHandler.GetFilteredBooksAsync(Filter);
+
+            return Page();
         }
     }
 }

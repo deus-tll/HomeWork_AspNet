@@ -13,7 +13,7 @@ namespace Library.Pages
         {
             _dataHandler = new DataHandler(db);
         }
-        public async Task OnGetAsync(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             Book? book = await _dataHandler.GetBookAsync(id);
 
@@ -21,6 +21,8 @@ namespace Library.Pages
                 RedirectToPage("/Error");
             else
                 Book = book;
+
+            return Page();
         }
     }
 }
