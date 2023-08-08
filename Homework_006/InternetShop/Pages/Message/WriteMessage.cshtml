@@ -1,0 +1,24 @@
+﻿@page
+@model InternetShop.Pages.Message.WriteMessageModel
+@{
+    ViewData["Title"] = "Write Message";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="MessageText"></label>
+                <textarea asp-for="MessageText" class="form-control" rows="5"></textarea>
+                <span asp-validation-for="MessageText" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+    </div>
+</section>

@@ -1,0 +1,22 @@
+﻿@page
+@model InternetShop.Pages.Account.DeleteUserModel
+@{
+    ViewData["Title"] = "Delete account";
+}
+
+<section class="main-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <div class="row">
+            <h3>Are you sure you want to delete your account?</h3>
+            <form method="post">
+                <button type="submit">Delete</button>
+                <a asp-page="/Account/Dashboard">Cancel</a>
+            </form>
+
+        </div>
+    </div>
+</section>

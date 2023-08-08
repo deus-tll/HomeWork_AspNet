@@ -1,0 +1,33 @@
+﻿@page
+@model InternetShop.Pages.Message.ViewMessagesModel
+@{
+    ViewData["Title"] = "View Messages";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        @if (Model.Messages != null && Model.Messages.Count > 0)
+        {
+            <ul>
+                @foreach (var message in Model.Messages)
+                {
+                    <li>
+                        <p><strong>From:</strong> @await Model.GetUserEmail(message.UserId)</p>
+                        <p><strong>Time:</strong> @message.CreatedAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                        <p>@message.Text</p>
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No messages found.</p>
+        }
+
+    </div>
+</section>

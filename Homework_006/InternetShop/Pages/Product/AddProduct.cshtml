@@ -1,0 +1,23 @@
+﻿@page
+@model InternetShop.Pages.Product.AddProductModel
+@{
+    ViewData["Title"] = "Add Product";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <form method="post">
+            <partial name="ProductForm" for="Product" />
+
+            <div class="text-center pt-5">
+                <button class="btn btn-submit" type="submit">Add</button>
+            </div>
+        </form>
+
+    </div>
+</section>

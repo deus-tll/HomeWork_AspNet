@@ -1,0 +1,22 @@
+﻿@page
+@model InternetShop.Pages.Account.DashboardModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="main-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <div class="row">
+            <ul>
+                <li>
+                    <p>This action cannot be undone. All your data will be permanently deleted.</p>
+                    <a asp-page="/Account/DeleteUser">Delete Account</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
