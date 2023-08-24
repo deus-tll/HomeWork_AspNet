@@ -1,0 +1,29 @@
+﻿@model Practice.Models.ViewModels.MainContentViewModel
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <div class="row">
+            @if (Model.ContentBlocks is not null)
+            {
+                @foreach (var contentBlock in Model.ContentBlocks)
+                {
+                    <h3>@contentBlock.Header</h3>
+
+                    <br class="line-break">
+
+                    <p>@Html.Raw(@contentBlock.TextContent)</p>
+
+                    <br class="line-break">
+                    <br class="line-break">
+                    <br class="line-break">
+                }
+            }
+        </div>
+
+    </div>
+</section>

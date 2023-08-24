@@ -1,0 +1,40 @@
+﻿@model MakeReviewViewModel
+@{
+    ViewData["Title"] = "Make Review About Us";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <div class="row">
+            <h3>Make review about us, ask some questions or just leave a message</h3>
+
+            <br class="line-break">
+
+            <form asp-action="MakeReview" method="post">
+                <div class="row">
+                    <label for="Email">Email:</label>
+                    <input class="form-control form-control-sm" type="text" id="Email" name="Email" required/>
+                </div>
+
+                <br class="line-break">
+
+                <div class="row">
+                    <label for="Text">Your review/message/questions:</label>
+                    <textarea class="form-control form-control-sm" id="Text" name="Text" rows="4" required></textarea>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center p-lg-3">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>

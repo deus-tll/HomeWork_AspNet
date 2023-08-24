@@ -1,0 +1,36 @@
+﻿@model ListRefsViewModel
+@{
+    ViewData["Title"] = "Apps";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <div class="row">
+            <h3>What apps are made with C#?</h3>
+
+            <p>
+                Here are a handful of programs and applications written in C# that demonstrate the language’s diversity and reliability:
+            </p>
+
+            <br class="line-break">
+
+            @if (Model.RefBlocks is not null)
+            {
+                @foreach (var refBlock in Model.RefBlocks)
+                {
+                    <ul>
+                        <li><a href="@refBlock.Ref">@refBlock.Name</a></li>
+                    </ul>
+
+                    <br class="line-break">
+                }
+            }
+        </div>
+
+    </div>
+</section>

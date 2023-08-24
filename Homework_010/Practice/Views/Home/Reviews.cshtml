@@ -1,0 +1,35 @@
+﻿@model WatchReviewsViewModel
+@{
+    ViewData["Title"] = "Watch Reviews";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        @if (Model.Messages != null && Model.Messages.Count > 0)
+        {
+            <ul>
+                @foreach (var message in Model.Messages)
+                {
+                    <li>
+                        <div class="div-border">
+                            <p><strong>From:</strong> @message.Email </p>
+                            <p><strong>Message:</strong> @message.Text</p>
+                        </div>
+                        <br />
+
+                    </li>
+                }
+            </ul>
+        }
+        else
+        {
+            <p>No messages found.</p>
+        }
+
+    </div>
+</section>
