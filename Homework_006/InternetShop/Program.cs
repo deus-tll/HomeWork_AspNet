@@ -22,7 +22,6 @@ using (var scope = app.Services.CreateScope())
     var dbContext = services.GetRequiredService<ApplicationContext>();
     await dbContext.Database.MigrateAsync();
 
-    // Ініціалізуйте базу даних
     var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     var configuration = services.GetRequiredService<IConfiguration>();
