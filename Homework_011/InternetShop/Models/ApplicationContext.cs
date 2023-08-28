@@ -25,5 +25,14 @@ namespace InternetShop.Models
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Product>()
+                .Property(p => p.Price)
+                .HasColumnType("decimal(18,2)");
+        }
     }
 }

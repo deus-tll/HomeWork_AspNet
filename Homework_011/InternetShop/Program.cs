@@ -20,7 +20,7 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    var dbContext = services.GetRequiredService<DbContext>();
+    var dbContext = services.GetRequiredService<ApplicationContext>();
     await dbContext.Database.MigrateAsync();
 
     var userManager = services.GetRequiredService<UserManager<IdentityUser>>();

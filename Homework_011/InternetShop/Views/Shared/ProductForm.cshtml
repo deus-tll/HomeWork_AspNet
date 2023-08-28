@@ -1,0 +1,43 @@
+﻿@model InternetShop.Models.DataModels.Product
+
+<div>
+    <label for="name">Name:</label>
+    <input class="form-control form-control-sm" type="text" id="title" name="Product.Name" asp-for="Name" />
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="brand">Brand:</label>
+    <input class="form-control form-control-sm" type="text" id="title" name="Product.Brand" asp-for="Brand" />
+    <span asp-validation-for="Brand" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="category">Category:</label>
+    <input class="form-control form-control-sm" type="text" id="title" name="Product.Category" asp-for="Category" />
+    <span asp-validation-for="Category" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="description">Description:</label>
+    <textarea class="form-control form-control-sm" id="description" name="Product.Description" asp-for="Description"></textarea>
+    <span asp-validation-for="Description" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="price">Price:</label>
+    <input class="form-control form-control-sm" type="number" id="price" name="Product.Price" asp-for="Price" />
+    <span asp-validation-for="Price" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="stockQuantity">StockQuantity:</label>
+    <input class="form-control form-control-sm" type="number" id="stockQuantity" name="Product.StockQuantity" asp-for="StockQuantity" />
+    <span asp-validation-for="StockQuantity" class="text-danger"></span>
+</div>
+
+<div>
+    <label for="yearOfManufacture">YearOfManufacture:</label>
+    <input class="form-control form-control-sm" type="number" id="yearOfManufacture" name="Product.YearOfManufacture" asp-for="YearOfManufacture" />
+    <span asp-validation-for="YearOfManufacture" class="text-danger"></span>
+</div>

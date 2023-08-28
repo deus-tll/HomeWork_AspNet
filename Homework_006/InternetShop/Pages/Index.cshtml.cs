@@ -1,7 +1,6 @@
 ﻿using InternetShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace InternetShop.Pages
 {

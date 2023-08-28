@@ -1,0 +1,93 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.my-nav-link {
+    color: lightgray !important;
+}
+
+    .my-nav-link:hover {
+        color: white !important;
+    }
+
+
+section {
+    padding: 60px 0;
+}
+
+.section-bg {
+    background-color: #e7f8f6;
+}
+
+.section-title {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+    .section-title h2 {
+        font-size: 32px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        position: relative;
+    }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #000000;
+            bottom: 0;
+            left: calc(50% - 25px);
+        }
+
+    .section-title p {
+        margin-bottom: 0;
+    }
+
+.main-section .content h3 {
+    font-weight: 700;
+    font-size: 26px;
+    color: whitesmoke;
+}
+
+.main-section .content ul {
+    list-style: none;
+    padding: 0;
+}
+
+    .main-section .content ul li {
+        padding-bottom: 10px;
+    }
+
+.main-section .content p:last-child {
+    margin-bottom: 0;
+}
+
+
+.btn-submit {
+    background-color: slategray;
+    color: whitesmoke;
+}
