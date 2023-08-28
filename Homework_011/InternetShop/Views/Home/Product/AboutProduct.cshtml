@@ -1,1 +1,46 @@
-﻿
+﻿@model AboutProductViewModel
+
+@{
+    ViewData["Title"] = "About Product";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-9 pt-4 pt-lg-0 content fst-italic">
+                <h3>"@Model.Product.Name"</h3>
+                <br />
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul>
+                            <li><strong>Category:</strong> @Model.Product.Category</li>
+                            <li><strong>Brand:</strong> @Model.Product.Brand</li>
+                            <li><strong>Stock Quantity:</strong> @Model.Product.StockQuantity</li>
+                            <li><strong>Price:</strong> @Model.Product.Price</li>
+                            <li><strong>Year Of Manufacture:</strong> @Model.Product.YearOfManufacture</li>
+                        </ul>
+                    </div>
+                </div>
+                <p><strong>Description:</strong> @Model.Product.Description</p>
+            </div>
+
+            <div class="row col-lg-3 justify-content-center">
+                @if (User.IsInRole("Manager"))
+                {
+                    <div class="col-lg-8">
+                        <a asp-controller="Home" asp-action="EditProduct" asp-route-id="@Model.Product.Id" class="btn btn-submit w-100 mb-2">Edit Product</a>
+                        <a asp-controller="Home" asp-action="DeleteProduct" asp-route-id="@Model.Product.Id" class="btn btn-submit w-100">Delete Product</a>
+                    </div>
+                }
+            </div>
+            
+        </div>
+
+    </div>
+</section>

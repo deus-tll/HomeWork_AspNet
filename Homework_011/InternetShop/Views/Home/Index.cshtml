@@ -6,7 +6,7 @@
 
 @using (Html.BeginForm("FilterProducts", "Home", FormMethod.Post))
 {
-    @await Html.PartialAsync("FilterForm", Model.Filter)
+    @await Html.PartialAsync("FilterForm", Model)
 
     <div class="text-center pt-5">
         <button class="btn btn-submit" type="submit">Apply Filters</button>

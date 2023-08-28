@@ -1,4 +1,5 @@
 using InternetShop.Models;
+using InternetShop.Models.HandlerModels;
 using InternetShop.Models.InitializeModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,8 @@ builder.Services.AddAuthentication("MyCookieAuthenticationScheme").AddCookie("My
     options.LoginPath = new PathString("/Home/Account/Login");
     options.LogoutPath = new PathString("/Home/Account/Logout");
 });
+
+builder.Services.AddScoped<IUserHandler, UserHandler>();
 
 var app = builder.Build();
 
@@ -31,7 +34,6 @@ using (var scope = app.Services.CreateScope())
     await userInitializer.InitializeAsync();
 }
 
-
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseAuthorization();
@@ -41,6 +43,5 @@ app.UseStaticFiles();
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}");
-
 
 app.Run();

@@ -1,11 +1,19 @@
 ﻿using InternetShop.Models.DataModels;
+using InternetShop.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace InternetShop.Models.HandlerModels
 {
-    public class UserHandler
+    public interface IUserHandler
+    {
+        Task<IdentityResult> SignUpUserAsync(string email, string password);
+        Task<SignInResult> LoginAsync(string email, string password, bool rememberMe);
+        Task LogoutAsync();
+    }
+
+    public class UserHandler : IUserHandler
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -46,6 +54,34 @@ namespace InternetShop.Models.HandlerModels
             await _context.SaveChangesAsync();
 
             return "Home/Index";
+        }
+
+
+        public async Task<IdentityResult> SignUpUserAsync(string email, string password)
+        {
+            var user = new IdentityUser { UserName = email, Email = email };
+            var result = await _userManager.CreateAsync(user, password);
+
+            if (result.Succeeded)
+            {
+                await _userManager.AddToRoleAsync(user, "User");
+                await _signInManager.SignInAsync(user, isPersistent: false);
+            }
+
+            return result;
+        }
+
+
+        public async Task<SignInResult> LoginAsync(string email, string password, bool rememberMe)
+        {
+            var result = await _signInManager.PasswordSignInAsync(email, password, rememberMe, lockoutOnFailure: false);
+            return result;
+        }
+
+
+        public async Task LogoutAsync()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }
