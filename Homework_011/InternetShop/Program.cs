@@ -2,6 +2,7 @@ using InternetShop.Models;
 using InternetShop.Models.HandlerModels;
 using InternetShop.Models.InitializeModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,12 +37,29 @@ using (var scope = app.Services.CreateScope())
 
 app.UseHttpsRedirection();
 app.UseRouting();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseStaticFiles();
+
 
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{action}",
+    defaults: new { controller = "Home", action = "Index" });
+
+//(domen)/api/Home/AboutProduct/8
+app.MapControllerRoute(
+    name: "default",
+    pattern: "api/{controller}/{action}/{id}");
+
+//(domen)/user/write_message
+app.MapControllerRoute(
+    name: "write_message",
+    pattern: "user/write_message",
+    defaults: new { controller = "Home", action = "WriteMessage" });
 
 app.Run();

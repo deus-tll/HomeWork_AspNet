@@ -9,11 +9,11 @@ namespace InternetShop.Models.DataModels
 
         [Required(ErrorMessage = "Name is required.")]
         [StringLength(100, ErrorMessage = "Name cannot exceed 100 characters.")]
-        public required string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
 
         [Required(ErrorMessage = "Description is required.")]
-        public required string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
 
         [Required(ErrorMessage = "Price is required.")]
@@ -22,15 +22,15 @@ namespace InternetShop.Models.DataModels
 
 
         [Required(ErrorMessage = "Category is required.")]
-        public required string Category { get; set; }
+        public string Category { get; set; } = string.Empty;
 
 
         [Required(ErrorMessage = "Brand is required.")]
-        public required string Brand { get; set; }
+        public string Brand { get; set; } = string.Empty;
 
 
         [Range(0, int.MaxValue, ErrorMessage = "Stock quantity must be a non-negative integer.")]
-        public int StockQuantity { get; set; }
+        public int StockQuantity { get; set; } 
 
 
         [Range(1900, 9999, ErrorMessage = "Invalid year of manufacture.")]

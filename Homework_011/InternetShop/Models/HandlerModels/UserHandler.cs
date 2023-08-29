@@ -11,6 +11,11 @@ namespace InternetShop.Models.HandlerModels
         Task<IdentityResult> SignUpUserAsync(string email, string password);
         Task<SignInResult> LoginAsync(string email, string password, bool rememberMe);
         Task LogoutAsync();
+        Task DeleteUserAsync(string? userName);
+        Task<List<Message>> GetMessages();
+        Task<string?> GetUserEmailByIdAsync(string userId);
+        Task<string> SendMessageToManager(ClaimsPrincipal currentUser, string messageText);
+
     }
 
     public class UserHandler : IUserHandler
@@ -31,17 +36,10 @@ namespace InternetShop.Models.HandlerModels
         public async Task<List<Message>> GetMessages() => await _context.Messages.ToListAsync();
 
 
-        public async Task<string?> GetUserEmail(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-            return user?.Email;
-        }
-
-
         public async Task<string> SendMessageToManager(ClaimsPrincipal currentUser, string messageText)
         {
             var user = await _userManager.GetUserAsync(currentUser);
-            if (user == null) return "Home/Error";
+            if (user == null) return "Error";
 
             var message = new Message
             {
@@ -53,7 +51,7 @@ namespace InternetShop.Models.HandlerModels
             await _context.Messages.AddAsync(message);
             await _context.SaveChangesAsync();
 
-            return "Home/Index";
+            return "Index";
         }
 
 
@@ -82,6 +80,27 @@ namespace InternetShop.Models.HandlerModels
         public async Task LogoutAsync()
         {
             await _signInManager.SignOutAsync();
+        }
+
+
+        public async Task DeleteUserAsync(string? userName)
+        {
+            if (userName is null) return;
+
+            var user = await _userManager.FindByNameAsync(userName);
+
+            if (user != null)
+            {
+                await _signInManager.SignOutAsync();
+                await _userManager.DeleteAsync(user);
+            }
+        }
+
+
+        public async Task<string?> GetUserEmailByIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            return user?.Email;
         }
     }
 }
