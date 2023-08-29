@@ -1,0 +1,26 @@
+﻿@model ProductViewModel
+@{
+    ViewData["Title"] = "Delete a Product";
+}
+
+<section class="main-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>@ViewData["Title"]</h2>
+        </div>
+
+        <div class="row">
+            <div class="text-center">
+                <p>Are you sure you want to delete the following product?</p>
+                <p>@Model.Product.Name [by @Model.Product.Brand]</p>
+                <p><strong>Description: </strong>@Model.Product.Description</p>
+
+                <form method="post">
+                    <input type="hidden" asp-for="Product.Id" />
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <a asp-action="AboutProduct" asp-route-id="@Model.Product.Id" class="btn btn-secondary">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

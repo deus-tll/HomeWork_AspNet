@@ -1,0 +1,31 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+@using (Html.BeginForm("FilterProducts", "Home", FormMethod.Post))
+{
+    @await Html.PartialAsync("FilterForm", Model)
+
+    <div class="text-center pt-5">
+        <button class="btn btn-submit" type="submit">Apply Filters</button>
+    </div>
+}
+
+
+<section class="main-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Library Of Books</h2>
+        </div>
+        <div class="row">
+            <div class="list-group list-group-light">
+                @foreach (var product in Model.Products)
+                {
+                    <a href="@Url.Action("AboutProduct", "Home", new { id = product.Id })" class="list-group-item list-group-item-action px-3 border-0 text-center">@product.Name [by @product.Brand]</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
