@@ -2,7 +2,6 @@ using InternetShop.Models;
 using InternetShop.Models.HandlerModels;
 using InternetShop.Models.InitializeModels;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

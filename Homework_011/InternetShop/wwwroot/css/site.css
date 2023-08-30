@@ -91,3 +91,14 @@ section {
     background-color: slategray;
     color: whitesmoke;
 }
+
+
+.line-break {
+    margin-bottom: 20px;
+}
+
+.div-border {
+    border: solid black;
+    padding: 10px;
+    border-radius: 6px;
+}

@@ -8,22 +8,20 @@
 {
     @await Html.PartialAsync("FilterForm", Model)
 
-    <div class="text-center pt-5">
-        <button class="btn btn-submit" type="submit">Apply Filters</button>
-    </div>
+    @Html.SubmitDivButtonBlock("Apply Filters")
 }
 
 
 <section class="main-section">
     <div class="container">
-        <div class="section-title">
-            <h2>Internet Shop</h2>
-        </div>
+
+        @Html.SectionTitle("Internet Shop")
+
         <div class="row">
             <div class="list-group list-group-light">
                 @foreach (var product in Model.Products)
                 {
-                    <a href="@Url.Action("AboutProduct", "Home", new { id = product.Id })" class="list-group-item list-group-item-action px-3 border-0 text-center">@product.Name [by @product.Brand]</a>
+                    @Html.ProductLink(product)
                 }
             </div>
         </div>

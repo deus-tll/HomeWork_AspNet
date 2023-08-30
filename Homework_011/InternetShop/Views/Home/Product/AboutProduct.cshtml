@@ -7,9 +7,10 @@
 <section class="main-section">
     <div class="container">
 
-        <div class="section-title">
-            <h2>@ViewData["Title"]</h2>
-        </div>
+        @if (ViewData["Title"] is string title && !string.IsNullOrEmpty(title))
+        {
+            @Html.SectionTitle(title)
+        }
 
 
         <div class="row">
@@ -22,7 +23,7 @@
                             <li><strong>Category:</strong> @Model.Product.Category</li>
                             <li><strong>Brand:</strong> @Model.Product.Brand</li>
                             <li><strong>Stock Quantity:</strong> @Model.Product.StockQuantity</li>
-                            <li><strong>Price:</strong> @Model.Product.Price</li>
+                            <li><strong>Price:</strong> @Html.PriceFormatter(@Model.Product.Price, "€")</li>
                             <li><strong>Year Of Manufacture:</strong> @Model.Product.YearOfManufacture</li>
                         </ul>
                     </div>

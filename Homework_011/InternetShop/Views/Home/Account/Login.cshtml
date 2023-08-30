@@ -5,10 +5,10 @@
 
 <section class="main-section">
     <div class="container">
-
-        <div class="section-title">
-            <h2>@ViewData["Title"]</h2>
-        </div>
+        @if (ViewData["Title"] is string title && !string.IsNullOrEmpty(title))
+        {
+            @Html.SectionTitle(title)
+        }
 
         <form method="post">
             <h4>Use your account to login.</h4>
@@ -28,7 +28,8 @@
                 <input asp-for="Input.RememberMe" class="form-check-input" />
                 <label asp-for="Input.RememberMe" class="form-check-label">Remember me</label>
             </div>
-            <button type="submit" class="btn btn-primary mt-2">Login</button>
+
+            @Html.SubmitDivButtonBlock("Login")
         </form>
 
     </div>
