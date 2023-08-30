@@ -6,9 +6,10 @@
 <section class="main-section">
     <div class="container">
 
-        <div class="section-title">
-            <h2>@ViewData["Title"]</h2>
-        </div>
+        @if (ViewData["Title"] is string title && !string.IsNullOrEmpty(title))
+        {
+            @Html.SectionTitle(title)
+        }
 
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,9 +18,7 @@
 
             @await Html.PartialAsync("ProductForm", Model)
 
-            <div class="text-center pt-5">
-                <button class="btn btn-submit" type="submit">Save</button>
-            </div>
+            @Html.SubmitDivButtonBlock("Save")
         </form>
 
     </div>

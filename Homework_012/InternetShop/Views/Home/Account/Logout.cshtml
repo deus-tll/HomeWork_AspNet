@@ -4,13 +4,17 @@
 
 <section class="main-section">
     <div class="container">
+        @if (ViewData["Title"] is string title && !string.IsNullOrEmpty(title))
+        {
+            @Html.SectionTitle(title)
+        }
 
-        <div class="section-title">
-            <h2>@ViewData["Title"]</h2>
-        </div>
-
-        <div class="alert alert-success">
-            You have been logged out.
+        <div class="row">
+            <h3>Are you sure you want to logout?</h3>
+            <form method="post" action="@Url.Action("ConfirmLogout", "Home")">
+                @Html.SubmitButton("Logout", "logout")
+                @Html.SubmitButton("Cancel", "cancel")
+            </form>
         </div>
 
     </div>

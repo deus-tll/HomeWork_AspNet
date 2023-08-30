@@ -5,6 +5,7 @@ using InternetShop.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace InternetShop.Controllers
 {
@@ -151,17 +152,37 @@ namespace InternetShop.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> Logout()
+        public IActionResult Logout()
         {
-            await _userHandler.LogoutAsync();
+            return View("~/Views/Home/Account/Logout.cshtml");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmLogout(string action)
+        {
+            if (action == "logout")
+                await _userHandler.LogoutAsync();
+
             return RedirectToAction("Index", "Home");
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> DeleteUser()
+        public IActionResult DeleteUser()
         {
-            await _userHandler.DeleteUserAsync(User.Identity?.Name);
+            return View("~/Views/Home/Account/DeleteUser.cshtml");
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmDeleteUser(string action)
+        {
+            if (action == "delete")
+                await _userHandler.DeleteUserAsync(User.Identity?.Name);
+            else if (action == "cancel")
+                return RedirectToAction("Dashboard", "Home");
+
             return RedirectToAction("Index", "Home");
         }
 
