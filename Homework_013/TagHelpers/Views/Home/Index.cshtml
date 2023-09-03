@@ -5,11 +5,29 @@
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     
+    <div class="row">
+        <youtube-video url="https://youtu.be/SBBWJ_c8piM?si=wNh0BWVq8hQQLOdS"></youtube-video>
+    </div>
 
 
+    <div class="row mt-5">
+        <link-to-action controller="Home" action="Index" target-blank="true">Перейти на дію контроллера в новій вкладці</link-to-action>
+    </div>
 
-    <youtube-video url="https://youtu.be/SBBWJ_c8piM?si=wNh0BWVq8hQQLOdS"></youtube-video>
+
+    <div class="row mt-5">
+        <tooltip-button text="Кнопка" tooltip="Це підказка для кнопки" class="btn btn-primary"></tooltip-button>
+    </div>
 
 
-    <link-to-action controller="Home" action="Index" target-blank="true">Перейти на головну сторінку</link-to-action>
+    <div class="row mt-5">
+        <upper-case text="my text some lower case text"></upper-case>
+    </div>
+
+
+    <div class="row mt-5">
+        <current-date></current-date>
+        <current-date format="dd/MM/yyyy"></current-date>
+        <current-date format="MMMM d, yyyy"></current-date>
+    </div>
 </div>

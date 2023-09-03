@@ -4,8 +4,8 @@ namespace TagHelpers.TagHelpers
 {
     public class TooltipButtonTagHelper : TagHelper
     {
-        public string Text { get; set; }
-        public string Tooltip { get; set; }
+        public string Text { get; set; } = string.Empty;
+        public string Tooltip { get; set; } = string.Empty;
 
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
