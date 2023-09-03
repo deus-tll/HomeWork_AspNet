@@ -40,6 +40,23 @@ namespace InternetShop.Controllers
         }
 
 
+        [HttpGet]
+        public async Task<IActionResult> TableProducts()
+        {
+            var products = await _productHandler.GetProductsAsync();
+            var filter = new ProductFilter();
+            var sortByOptions = GetSortByOptions(filter.SortBy);
+            var viewModel = new IndexViewModel
+            {
+                Products = products,
+                Filter = filter,
+                SortByOptions = sortByOptions
+            };
+
+            return View(viewModel);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> FilterProducts(ProductFilter filter)
         {
@@ -49,7 +66,8 @@ namespace InternetShop.Controllers
             { 
                 Products = products, 
                 Filter = filter, 
-                SortByOptions = sortByOptions
+                SortByOptions = sortByOptions,
+                IsFiltered = true
             };
 
             return View("Index", viewModel);

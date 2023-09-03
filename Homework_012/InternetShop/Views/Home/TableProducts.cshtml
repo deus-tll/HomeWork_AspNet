@@ -1,0 +1,43 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        @Html.SectionTitle("Internet Shop Table")
+
+        <div class="row">
+            <table class="table table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Brand</th>
+                        <th>Stock Quantity</th>
+                        <th>Year of Manufacture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.Products)
+                    {
+                        <tr>
+                            <td>@product.Id</td>
+                            <td>@product.Name</td>
+                            <td>@product.Description</td>
+                            <td>@Html.PriceFormatter(product.Price, "€")</td>
+                            <td>@product.Category</td>
+                            <td>@product.Brand</td>
+                            <td>@product.StockQuantity</td>
+                            <td>@product.YearOfManufacture</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

@@ -39,5 +39,5 @@
 <div>
     <label for="yearOfManufacture">YearOfManufacture:</label>
     @Html.TextBoxFor(m => m.Product.YearOfManufacture, new { @class = "form-control form-control-sm" })
-    @Html.ValidationMessageFor(m => m.Product.YearOfManufacture, "", new { @class = "text-danger" })
+    @Html.ValidationMessageFor(m => m.Product.YearOfManufacture,"", new { @class = "text-danger" })
 </div>

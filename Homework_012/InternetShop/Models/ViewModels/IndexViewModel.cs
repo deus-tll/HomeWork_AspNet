@@ -11,5 +11,7 @@ namespace InternetShop.Models.ViewModels
         public required ProductFilter Filter { get; set; }
 
         public required List<SelectListItem> SortByOptions { get; set; }
+
+        public bool IsFiltered { get; set; } = false;
     }
 }
