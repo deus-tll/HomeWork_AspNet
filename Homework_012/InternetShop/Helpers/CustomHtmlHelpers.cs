@@ -23,7 +23,7 @@ namespace InternetShop.Helpers
         public static IHtmlContent SubmitButton(this IHtmlHelper htmlHelper, string buttonText, string value = "")
         {
             var buttonTag = new TagBuilder("button");
-            buttonTag.AddCssClass("btn btn-submit");
+            buttonTag.AddCssClass("btn btn-submit me-5 mt-2");
             buttonTag.Attributes["type"] = "submit";
             buttonTag.InnerHtml.Append(buttonText);
 

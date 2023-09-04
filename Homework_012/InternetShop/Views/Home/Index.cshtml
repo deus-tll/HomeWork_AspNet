@@ -18,12 +18,7 @@
         @Html.SectionTitle("Internet Shop")
 
         <div class="row">
-            <div class="list-group list-group-light">
-                @foreach (var product in Model.Products)
-                {
-                    @Html.ProductLink(product)
-                }
-            </div>
+            <vc:product-list products="Model.Products" />
         </div>
 
         <div class="row mt-5">

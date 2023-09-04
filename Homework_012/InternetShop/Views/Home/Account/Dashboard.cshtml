@@ -12,18 +12,14 @@
         <div class="row">
             <ul>
                 <li>
-                    <div class="div-border">
-                        <p style="margin:5px;">You will be logged out of your account.</p>
-                        <a class="link-warning" asp-controller="Home" asp-action="Logout">Logout</a>
-                    </div>
-                    <br class="line-break" />
+                    <vc:dashboard-list-item paragraph-content="You will be logged out of your account."
+                                            controller-name="Home" action-name="Logout"
+                                            link-text="Logout" link-class="link-warning" />
                 </li>
                 <li>
-                    <div class="div-border">
-                        <p style="margin:5px;">This action cannot be undone. All your data will be permanently deleted.</p>
-                        <a class="link-danger" asp-controller="Home" asp-action="DeleteUser">Delete Account</a>
-                    </div>
-                    <br class="line-break" />
+                    <vc:dashboard-list-item paragraph-content="This action cannot be undone. All your data will be permanently deleted."
+                                            controller-name="Home" action-name="DeleteUser" 
+                                            link-text="Delete Account" link-class="link-danger" />
                 </li>
             </ul>
         </div>

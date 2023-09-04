@@ -10,12 +10,25 @@
         }
 
         <div class="row">
-            <h3>Are you sure you want to logout?</h3>
-            <form method="post" action="@Url.Action("ConfirmLogout", "Home")">
-                @Html.SubmitButton("Logout", "logout")
-                @Html.SubmitButton("Cancel", "cancel")
-            </form>
-        </div>
+            @{
+                var buttons = new List<MyButton>
+                {
+                    new MyButton()
+                    {
+                        Text = "Logout",
+                        Value = "logout"
+                    },
+                    new MyButton()
+                    {
+                        Text = "Cancel",
+                        Value = "cancel"
+                    }
+                };
+            }
 
+            <vc:confirm-action header="Are you sure you want to logout?"
+                               controller-name="Home" action-name="ConfirmLogout"
+                               buttons="buttons" />
+        </div>
     </div>
 </section>
