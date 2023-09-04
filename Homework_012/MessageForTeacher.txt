@@ -1,2 +1,8 @@
-1.) власні хелпери готові.
-2.) хелпери елементів форм я показував на парі ще де використав.
+1.) 
+- ConfirmActionViewComponent використовується в файлах DeleteUser.cshtml та Logout.cshtml
+- DashboardListItemViewComponent використовується в файлі Dashboard.cshtml
+- ProductInfoViewComponent використовується в файлі AboutProduct.cshtml
+- ProductListViewComponent використовується в файлі Index.cshtml
+- SectionTitleViewComponent використовується в файлах AboutProduct.cshtml(там в принципі в кожному View він може бути застосований майже)
+ 
+2.) валідації там в приниципі на всіх формах є

@@ -6,10 +6,7 @@
 
 <section class="main-section">
     <div class="container">
-        @if (ViewData["Title"] is string title && !string.IsNullOrEmpty(title))
-        {
-            @Html.SectionTitle(title)
-        }
+        @await Component.InvokeAsync("SectionTitle")
 
         <form asp-controller="Home" asp-action="WriteMessage" method="post">
             <div class="form-group">
