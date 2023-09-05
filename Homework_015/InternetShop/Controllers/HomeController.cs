@@ -6,10 +6,11 @@ using InternetShop.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
 
 namespace InternetShop.Controllers
 {
+    [AuthorizeHomeController]
+    [ServiceFilter(typeof(MyExceptionFilter))]
     public class HomeController : Controller
     {
         private readonly IUserHandler _userHandler;
@@ -23,7 +24,6 @@ namespace InternetShop.Controllers
 
 
         [HttpGet]
-        [Route("{controller=Home}/{action=Index}")]
         [ServiceFilter(typeof(LogActionFilterAttribute))]
         public async Task<IActionResult> Index()
         {

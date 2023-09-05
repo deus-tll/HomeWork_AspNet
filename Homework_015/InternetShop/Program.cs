@@ -7,7 +7,11 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(typeof(MEAsyncFilterAttribute));
+    options.Filters.Add(typeof(LastVisitCookieFilter));
+});
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
@@ -19,6 +23,7 @@ builder.Services.AddAuthentication("MyCookieAuthenticationScheme").AddCookie("My
 
 builder.Services.AddScoped<IUserHandler, UserHandler>();
 builder.Services.AddScoped<LogActionFilterAttribute>();
+builder.Services.AddScoped<MyExceptionFilter>();
 
 var app = builder.Build();
 
