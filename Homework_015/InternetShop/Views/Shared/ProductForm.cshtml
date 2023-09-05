@@ -1,0 +1,43 @@
+﻿@model ProductViewModel
+
+<div>
+    <label for="name">Name:</label>
+    @Html.TextBoxFor(m => m.Product.Name, new { @class = "form-control form-control-sm" })
+    @Html.ValidationMessageFor(m => m.Product.Name, "", new { @class = "text-danger" })
+</div>
+
+<div>
+    <label for="brand">Brand:</label>
+    @Html.TextBoxFor(m => m.Product.Brand, new { @class = "form-control form-control-sm" })
+    @Html.ValidationMessageFor(m => m.Product.Brand, "", new { @class = "text-danger" })
+</div>
+
+<div>
+    <label for="category">Category:</label>
+    @Html.TextBoxFor(m => m.Product.Category, new { @class = "form-control form-control-sm" })
+    @Html.ValidationMessageFor(m => m.Product.Category, "", new { @class = "text-danger" })
+</div>
+
+<div>
+    <label for="description">Description:</label>
+    @Html.TextAreaFor(m => m.Product.Description, new { @class = "form-control form-control-sm" })
+    @Html.ValidationMessageFor(m => m.Product.Description, "", new { @class = "text-danger" })
+</div>
+
+<div>
+    <label for="price">Price:</label>
+    @Html.TextBoxFor(m => m.Product.Price, new { @class = "form-control form-control-sm" })
+    @Html.ValidationMessageFor(m => m.Product.Price, "", new { @class = "text-danger" })
+</div>
+
+<div>
+    <label for="stockQuantity">StockQuantity:</label>
+    @Html.TextBoxFor(m => m.Product.StockQuantity, new { @class = "form-control form-control-sm" })
+    @Html.ValidationMessageFor(m => m.Product.StockQuantity, "", new { @class = "text-danger" })
+</div>
+
+<div>
+    <label for="yearOfManufacture">YearOfManufacture:</label>
+    @Html.TextBoxFor(m => m.Product.YearOfManufacture, new { @class = "form-control form-control-sm" })
+    @Html.ValidationMessageFor(m => m.Product.YearOfManufacture,"", new { @class = "text-danger" })
+</div>

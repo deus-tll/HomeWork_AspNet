@@ -1,0 +1,9 @@
+﻿@model ConfirmActionViewModel
+
+<h3>@Model.Header</h3>
+<form method="post" action="@Url.Action(@Model.ActionName, @Model.ControllerName)">
+    @foreach (var button in @Model.Buttons)
+    {
+        @Html.SubmitButton(button.Text, button.Value)
+    }
+</form>

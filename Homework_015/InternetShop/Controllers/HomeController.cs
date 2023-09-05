@@ -1,12 +1,10 @@
-﻿using InternetShop.Filters;
-using InternetShop.Models;
+﻿using InternetShop.Models;
 using InternetShop.Models.DataModels;
 using InternetShop.Models.HandlerModels;
 using InternetShop.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Logging;
 
 namespace InternetShop.Controllers
 {
@@ -14,6 +12,7 @@ namespace InternetShop.Controllers
     {
         private readonly IUserHandler _userHandler;
         private readonly ProductHandler _productHandler;
+
 
         public HomeController(IUserHandler userHandler, ApplicationContext context)
         {
@@ -24,7 +23,6 @@ namespace InternetShop.Controllers
 
         [HttpGet]
         [Route("{controller=Home}/{action=Index}")]
-        [ServiceFilter(typeof(LogActionFilterAttribute))]
         public async Task<IActionResult> Index()
         {
             var products = await _productHandler.GetProductsAsync();

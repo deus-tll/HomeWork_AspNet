@@ -1,4 +1,3 @@
-using InternetShop.Filters;
 using InternetShop.Models;
 using InternetShop.Models.HandlerModels;
 using InternetShop.Models.InitializeModels;
@@ -18,7 +17,6 @@ builder.Services.AddAuthentication("MyCookieAuthenticationScheme").AddCookie("My
 });
 
 builder.Services.AddScoped<IUserHandler, UserHandler>();
-builder.Services.AddScoped<LogActionFilterAttribute>();
 
 var app = builder.Build();
 

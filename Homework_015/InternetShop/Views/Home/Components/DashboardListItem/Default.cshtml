@@ -1,0 +1,7 @@
+﻿@model DashboardListItemViewModel
+
+<div class="div-border">
+    <p style="margin:5px;">@Model.ParagraphContent</p>
+    <a class="@Model.LinkClass" asp-controller="@Model.ControllerName" asp-action="@Model.ActionName">@Model.LinkText</a>
+</div>
+<br class="line-break" />
