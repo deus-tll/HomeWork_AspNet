@@ -1,0 +1,8 @@
+﻿@model ProductListViewModel
+
+<div class="list-group list-group-light">
+    @foreach (var product in Model.Products)
+    {
+        @Html.ProductLink(product)
+    }
+</div>

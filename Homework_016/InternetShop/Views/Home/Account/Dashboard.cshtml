@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="main-section">
+    <div class="container">
+        @await Component.InvokeAsync("SectionTitle")
+
+        <div class="row">
+            <ul>
+                <li>
+                    <vc:dashboard-list-item paragraph-content="You will be logged out of your account."
+                                            controller-name="Home" action-name="Logout"
+                                            link-text="Logout" link-class="link-warning" />
+                </li>
+                <li>
+                    <vc:dashboard-list-item paragraph-content="This action cannot be undone. All your data will be permanently deleted."
+                                            controller-name="Home" action-name="DeleteUser" 
+                                            link-text="Delete Account" link-class="link-danger" />
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

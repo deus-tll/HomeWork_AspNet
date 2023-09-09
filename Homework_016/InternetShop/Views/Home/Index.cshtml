@@ -1,0 +1,33 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+
+@using (Html.BeginForm("FilterProducts", "Home", FormMethod.Post))
+{
+    @await Html.PartialAsync("FilterForm", Model)
+
+    @Html.SubmitDivButtonBlock("Apply Filters")
+}
+
+
+<section class="main-section">
+    <div class="container">
+
+        @Html.SectionTitle("Internet Shop")
+
+        <div class="row">
+            <vc:product-list products="Model.Products" />
+        </div>
+
+        <div class="row mt-5">
+            @if (Model.IsFiltered)
+            {
+                <div class="alert alert-success" role="alert">
+                    List was filtered!
+                </div>
+            }
+        </div>
+    </div>
+</section>

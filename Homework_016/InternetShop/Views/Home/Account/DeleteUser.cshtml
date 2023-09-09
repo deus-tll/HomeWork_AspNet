@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Delete account";
+}
+
+<section class="main-section">
+    <div class="container">
+        @if (ViewData["Title"] is string title && !string.IsNullOrEmpty(title))
+        {
+            @Html.SectionTitle(title)
+        }
+        
+        <div class="row">
+
+            @{
+                var buttons = new List<MyButton>
+                {
+                    new MyButton()
+                    {
+                        Text = "Delete",
+                        Value = "delete"
+                    },
+                    new MyButton()
+                    {
+                        Text = "Cancel",
+                        Value = "cancel"
+                    }
+                };
+            }
+
+            <vc:confirm-action header="Are you sure you want to delete your account?" 
+                               controller-name="Home" action-name="ConfirmDeleteUser" 
+                               buttons="buttons" />
+        </div>
+    </div>
+</section>
