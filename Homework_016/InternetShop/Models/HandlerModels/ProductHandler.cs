@@ -12,22 +12,16 @@ namespace InternetShop.Models.HandlerModels
         public ProductHandler(ApplicationContext context) => _context = context;
 
 
-        private async Task<List<Product>> GetProductsFromDbAsync() => await _context.Products.AsNoTracking().ToListAsync();
+        public async Task<List<Product>> GetProductsAsync() => await _context.Products.AsNoTracking().ToListAsync();
 
 
-        public async Task<List<Product>> GetProductsAsync()
+        public async Task<List<Product>> GetFilteredProductsAsync(ProductFilter? filter)
         {
-            List<Product> products = await GetProductsFromDbAsync();
+            List<Product> products = await GetProductsAsync();
 
-            return products;
-        }
-
-
-        public async Task<List<Product>> GetFilteredProductsAsync(ProductFilter filter)
-        {
-            List<Product> products = await GetProductsFromDbAsync();
-
-            products = products
+            if (filter is not null)
+            {
+                products = products
                 .Where(p => (string.IsNullOrEmpty(filter.Name) || p.Name.ToLower().Contains(filter.Name.ToLower())) &&
                             (string.IsNullOrEmpty(filter.Category) || p.Category.ToLower().Contains(filter.Category.ToLower())) &&
                             (string.IsNullOrEmpty(filter.Brand) || p.Brand.ToLower().Contains(filter.Brand.ToLower())) &&
@@ -39,14 +33,15 @@ namespace InternetShop.Models.HandlerModels
                             (filter.MaxYearOfManufacture is null || p.YearOfManufacture <= filter.MaxYearOfManufacture))
                 .ToList();
 
-            products = filter.SortBy switch
-            {
-                "Name" => filter.IsSortAscending ? products.OrderBy(p => p.Name).ToList() : products.OrderByDescending(p => p.Name).ToList(),
-                "Category" => filter.IsSortAscending ? products.OrderBy(p => p.Category).ToList() : products.OrderByDescending(p => p.Category).ToList(),
-                "Brand" => filter.IsSortAscending ? products.OrderBy(p => p.Brand).ToList() : products.OrderByDescending(p => p.Brand).ToList(),
-                _ => products
-            };
-
+                products = filter.SortBy switch
+                {
+                    "Name" => filter.IsSortAscending ? products.OrderBy(p => p.Name).ToList() : products.OrderByDescending(p => p.Name).ToList(),
+                    "Category" => filter.IsSortAscending ? products.OrderBy(p => p.Category).ToList() : products.OrderByDescending(p => p.Category).ToList(),
+                    "Brand" => filter.IsSortAscending ? products.OrderBy(p => p.Brand).ToList() : products.OrderByDescending(p => p.Brand).ToList(),
+                    _ => products
+                };
+            }
+            
             return products;
         }
 

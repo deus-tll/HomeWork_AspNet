@@ -6,12 +6,12 @@ namespace InternetShop.Models.ViewModels
 {
     public class IndexViewModel
     {
-        public required List<Product> Products { get; set; }
-
         public required ProductFilter Filter { get; set; }
 
         public required List<SelectListItem> SortByOptions { get; set; }
 
-        public bool IsFiltered { get; set; } = false;
+        public required PaginatedList<Product> PaginatedList { get; set; }
+
+        public bool IsFiltered { get; set; }
     }
 }

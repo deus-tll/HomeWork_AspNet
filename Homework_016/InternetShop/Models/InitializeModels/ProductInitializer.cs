@@ -23,8 +23,11 @@ namespace InternetShop.Models.InitializeModels
 
             if (!products.Any())
             {
-                await _context.AddRangeAsync(CreateListOfDefaultProducts());
-                await _context.SaveChangesAsync();
+                for (int i = 0; i < 7; i++)
+                {
+                    await _context.AddRangeAsync(CreateListOfDefaultProducts());
+                    await _context.SaveChangesAsync();
+                }
             }
         }
 

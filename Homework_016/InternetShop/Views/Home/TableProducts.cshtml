@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var product in Model.Products)
+                    @foreach (var product in Model.PaginatedList.Items)
                     {
                         <tr>
                             <td>@product.Id</td>
@@ -38,6 +38,10 @@
                     }
                 </tbody>
             </table>
+        </div>
+
+        <div class="row">
+            @await Html.PartialAsync("ProductPagination", Model.PaginatedList)
         </div>
     </div>
 </section>

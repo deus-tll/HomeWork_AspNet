@@ -6,6 +6,7 @@ using InternetShop.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 
 namespace InternetShop.Controllers
 {
@@ -16,6 +17,7 @@ namespace InternetShop.Controllers
         private readonly IUserHandler _userHandler;
         private readonly ProductHandler _productHandler;
 
+
         public HomeController(IUserHandler userHandler, ApplicationContext context)
         {
             _userHandler = userHandler;
@@ -25,53 +27,70 @@ namespace InternetShop.Controllers
 
         [HttpGet]
         [ServiceFilter(typeof(LogActionFilterAttribute))]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1, int pageSize = 7)
         {
-            var products = await _productHandler.GetProductsAsync();
-            var filter = new ProductFilter();
-            var sortByOptions = GetSortByOptions(filter.SortBy);
-            var viewModel = new IndexViewModel 
-            { 
-                Products = products, 
-                Filter = filter, 
-                SortByOptions = sortByOptions 
-            };
+            List<Product> products;
+            ProductFilter? filter = null;
+
+            if (TempData.ContainsKey("Filter"))
+            {
+                var filterJson = TempData["Filter"] as string;
+                if (!string.IsNullOrEmpty(filterJson))
+                {
+                    filter = JsonConvert.DeserializeObject<ProductFilter>(filterJson);
+                    TempData["Filter"] = JsonConvert.SerializeObject(filter);
+                }
+            }
+
+            if (filter is not null)
+                products = await _productHandler.GetFilteredProductsAsync(filter);
+            else
+                products = await _productHandler.GetProductsAsync();
+
+            var viewModel = GetIndexViewModel(filter ?? new ProductFilter(), products, page, pageSize, "Index", false);
 
             return View(viewModel);
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> ProductsFiltering(ProductFilter filter, int page = 1, int pageSize = 7)
+        {
+            TempData["Filter"] = JsonConvert.SerializeObject(filter);
+
+            var products = await _productHandler.GetFilteredProductsAsync(filter);
+
+            var viewModel = GetIndexViewModel(filter, products, page, pageSize, "Index", true);
+
+            return View("Index", viewModel);
+        }
+
+        private static IndexViewModel GetIndexViewModel(ProductFilter filter, List<Product> products, int page, int pageSize, string action, bool isFiltered)
+        {
+            var paginatedProducts = PaginatedList<Product>.Create(products.AsQueryable(), page, pageSize, action);
+            var sortByOptions = GetSortByOptions(filter.SortBy);
+
+            var viewModel = new IndexViewModel
+            {
+                Filter = filter,
+                SortByOptions = sortByOptions,
+                IsFiltered = isFiltered,
+                PaginatedList = paginatedProducts
+            };
+
+            return viewModel;
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> TableProducts()
+        public async Task<IActionResult> TableProducts(int page = 1, int pageSize = 7)
         {
             var products = await _productHandler.GetProductsAsync();
-            var filter = new ProductFilter();
-            var sortByOptions = GetSortByOptions(filter.SortBy);
-            var viewModel = new IndexViewModel
-            {
-                Products = products,
-                Filter = filter,
-                SortByOptions = sortByOptions
-            };
+
+            var viewModel = GetIndexViewModel(new ProductFilter(), products, page, pageSize, "TableProducts", false);
 
             return View(viewModel);
-        }
-
-
-        [HttpPost]
-        public async Task<IActionResult> FilterProducts(ProductFilter filter)
-        {
-            var products = await _productHandler.GetFilteredProductsAsync(filter);
-            var sortByOptions = GetSortByOptions(filter.SortBy);
-            var viewModel = new IndexViewModel 
-            { 
-                Products = products, 
-                Filter = filter, 
-                SortByOptions = sortByOptions,
-                IsFiltered = true
-            };
-
-            return View("Index", viewModel);
         }
 
 

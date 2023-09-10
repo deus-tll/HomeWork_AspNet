@@ -57,7 +57,7 @@ namespace InternetShop.Models.HandlerModels
 
         public async Task<IdentityResult> SignUpUserAsync(string email, string password)
         {
-            var user = new MyIdentityUser { UserName = email, Email = email };
+            var user = new IdentityUser { UserName = email, Email = email };
             var result = await _userManager.CreateAsync(user, password);
 
             if (result.Succeeded)

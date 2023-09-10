@@ -4,7 +4,7 @@
 }
 
 
-@using (Html.BeginForm("FilterProducts", "Home", FormMethod.Post))
+@using (Html.BeginForm("ProductsFiltering", "Home", FormMethod.Post))
 {
     @await Html.PartialAsync("FilterForm", Model)
 
@@ -18,7 +18,7 @@
         @Html.SectionTitle("Internet Shop")
 
         <div class="row">
-            <vc:product-list products="Model.Products" />
+            <vc:product-list paginated-list="Model.PaginatedList" />
         </div>
 
         <div class="row mt-5">

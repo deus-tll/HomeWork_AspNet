@@ -1,8 +1,10 @@
 ﻿@model ProductListViewModel
 
 <div class="list-group list-group-light">
-    @foreach (var product in Model.Products)
+    @foreach (var product in Model.PaginatedList.Items)
     {
         @Html.ProductLink(product)
     }
 </div>
+
+@await Html.PartialAsync("ProductPagination", Model.PaginatedList)

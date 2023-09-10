@@ -1,0 +1,44 @@
+﻿@model PaginatedList<Product>
+
+<nav aria-label="Page navigation example" class="mt-5">
+    <ul class="pagination justify-content-center">
+        @if (Model.HasPreviousPage)
+        {
+            <li class="page-item">
+                <a asp-action="@Model.Action" class="page-link text-white-50" asp-route-page="1" asp-route-pageSize="@Model.PageSize">@Html.Raw("<<") Початок</a>
+            </li>
+
+            <li class="page-item">
+                <a asp-action="@Model.Action" class="page-link text-white-50" asp-route-page="@(Model.PageIndex - 1)" asp-route-pageSize="@Model.PageSize">@Html.Raw("<") Попередня</a>
+            </li>
+        }
+
+        @for (int i = 1; i < Model.TotalPages; i++)
+        {
+            if (i == 1 || i == Model.PageIndex || i == Model.TotalPages || (i >= Model.PageIndex - 2 && i <= Model.PageIndex + 2))
+            {
+                <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                    <a asp-action="@Model.Action" class="page-link text-white-50" asp-route-page="@i" asp-route-pageSize="@Model.PageSize">@i</a>
+                </li>
+            }
+            else if (i == Model.PageIndex - 3 || i == Model.PageIndex + 3)
+            {
+                <li class="page-item">
+                    <div class="page-link text-white-50">...</div>
+                </li>
+            }
+        }
+
+
+        @if (Model.HasNextPage)
+        {
+            <li class="page-item">
+                <a asp-action="@Model.Action" class="page-link text-white-50" asp-route-page="@(Model.PageIndex + 1)" asp-route-pageSize="@Model.PageSize">Наступна ></a>
+            </li>
+
+            <li class="page-item">
+                <a asp-action="@Model.Action" class="page-link text-white-50" asp-route-page="@Model.TotalPages" asp-route-pageSize="@Model.PageSize">Кінець >></a>
+            </li>
+        }
+    </ul>
+</nav>

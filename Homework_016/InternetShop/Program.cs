@@ -28,6 +28,11 @@ builder.Services.AddScoped<IUserHandler, UserHandler>();
 builder.Services.AddScoped<LogActionFilterAttribute>();
 builder.Services.AddScoped<MyExceptionFilter>();
 
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
