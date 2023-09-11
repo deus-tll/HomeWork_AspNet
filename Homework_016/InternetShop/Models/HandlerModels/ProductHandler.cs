@@ -1,15 +1,28 @@
 ﻿using InternetShop.Models.DataModels;
-using InternetShop.Models.InitializeModels;
 using Microsoft.EntityFrameworkCore;
 
 namespace InternetShop.Models.HandlerModels
 {
-    public class ProductHandler
+    public interface IProductHandler
+    {
+        Task<List<Product>> GetProductsAsync();
+        Task<List<Product>> GetFilteredProductsAsync(ProductFilter? filter);
+        Task<Product?> GetProductAsync(int id);
+        Task UpdateProductAsync(Product product);
+        Task DeleteProductAsync(Product product);
+        Task AddProductAsync(Product product);
+    }
+
+    public class ProductHandler : IProductHandler
     {
         private readonly ApplicationContext _context;
+        private readonly ILogger<ProductHandler> _logger;
 
-
-        public ProductHandler(ApplicationContext context) => _context = context;
+        public ProductHandler(ApplicationContext context, ILogger<ProductHandler> logger)
+        {
+            _context = context;
+            _logger = logger;
+        }
 
 
         public async Task<List<Product>> GetProductsAsync() => await _context.Products.AsNoTracking().ToListAsync();
@@ -50,23 +63,44 @@ namespace InternetShop.Models.HandlerModels
 
 
         public async Task UpdateProductAsync(Product product)
-        {
-            _context.Products.Update(product);
-            await _context.SaveChangesAsync();
+        {            
+            try
+            {
+                _context.Products.Update(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Something went wrong while performing \"Update element in Products\" operation in the DB.");
+            }
         }
 
 
         public async Task DeleteProductAsync(Product product)
         {
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+            try
+            {
+                _context.Products.Remove(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Something went wrong while performing \"Remove element from Products\" operation in the DB.");
+            }
         }
 
 
         public async Task AddProductAsync(Product product)
         {
-            await _context.Products.AddAsync(product);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Products.AddAsync(product);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Something went wrong while performing \"Add element to Products\" operation in the DB.");
+            }
         }
     }
 }

@@ -15,13 +15,13 @@ namespace InternetShop.Controllers
     public class HomeController : Controller
     {
         private readonly IUserHandler _userHandler;
-        private readonly ProductHandler _productHandler;
+        private readonly IProductHandler _productHandler;
 
 
-        public HomeController(IUserHandler userHandler, ApplicationContext context)
+        public HomeController(IUserHandler userHandler, IProductHandler productHandler)
         {
             _userHandler = userHandler;
-            _productHandler = new(context);
+            _productHandler = productHandler;
         }
 
 

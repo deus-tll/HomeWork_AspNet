@@ -19,7 +19,7 @@ namespace InternetShop.Filters
                 Expires = DateTime.Now.AddMonths(1)
             };
 
-            _httpContextAccessor.HttpContext.Response.Cookies.Append("LastVisit", lastVisitTime.ToString(), lastVisitCookie);
+            _httpContextAccessor.HttpContext?.Response.Cookies.Append("LastVisit", lastVisitTime.ToString(), lastVisitCookie);
         }
 
         public void OnActionExecuting(ActionExecutingContext context)

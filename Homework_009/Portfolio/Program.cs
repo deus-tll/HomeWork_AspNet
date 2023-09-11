@@ -1,5 +1,3 @@
-using Microsoft.Extensions.Logging;
-using NuGet.Protocol;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);

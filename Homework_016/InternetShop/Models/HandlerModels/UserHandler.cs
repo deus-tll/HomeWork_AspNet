@@ -1,4 +1,5 @@
-﻿using InternetShop.Models.DataModels;
+﻿using InternetShop.Controllers;
+using InternetShop.Models.DataModels;
 using InternetShop.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -23,13 +24,15 @@ namespace InternetShop.Models.HandlerModels
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ApplicationContext _context;
+        private readonly ILogger<UserHandler> _logger;
 
 
-        public UserHandler(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ApplicationContext context)
+        public UserHandler(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ApplicationContext context, ILogger<UserHandler> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _logger = logger;
         }
 
 
@@ -48,8 +51,15 @@ namespace InternetShop.Models.HandlerModels
                 UserId = user.Id
             };
 
-            await _context.Messages.AddAsync(message);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Messages.AddAsync(message);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Something went wrong while performing \"Add element to Messages\" operation in the DB.");
+            }
 
             return "Index";
         }
