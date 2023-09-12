@@ -47,6 +47,21 @@
                                 <a class="nav-link my-nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
                             </li>
                         }
+                        else if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link my-nav-link" asp-controller="Home" asp-action="AddProduct">Add Product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link my-nav-link" asp-controller="Home" asp-action="ViewMessages">View Messages</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link my-nav-link" asp-controller="AdminPanel" asp-action="Index">Admin Panel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link my-nav-link" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                        }
                         else
                         {
                             <li class="nav-item">

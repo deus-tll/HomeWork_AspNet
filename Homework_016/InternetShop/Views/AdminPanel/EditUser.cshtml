@@ -1,0 +1,47 @@
+﻿@model EditUserViewModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<section class="main-section">
+    <div class="container">
+
+        @if (ViewData["Title"] is string title && !string.IsNullOrEmpty(title))
+        {
+            @Html.SectionTitle(title)
+        }
+
+        <div class="row">
+            <form asp-action="EditUser" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="Email"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="YearOfBirth"></label>
+                    <input asp-for="YearOfBirth" class="form-control" />
+                    <span asp-validation-for="YearOfBirth" class="text-danger"></span>
+                </div>
+
+                <div class="row justify-content-center mt-5">
+                    <button type="submit" class="btn btn-primary w-25 m-2">Save</button>
+                    <a asp-action="Index" class="btn btn-secondary w-25 m-2">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</section>

@@ -1,6 +1,6 @@
 ﻿@model SignUpViewModel
 @{
-    ViewData["Title"] = "Sign Up";
+    ViewData["Title"] = "Create User";
 }
 
 <section class="main-section">
@@ -11,9 +11,11 @@
             @Html.SectionTitle(title)
         }
 
-        <form method="post">
-            @await Html.PartialAsync("CreateUserForm", Model)
-        </form>
+        <div class="row">
+            <form method="post">
+                @await Html.PartialAsync("CreateUserForm", Model)
+            </form>
+        </div>
 
     </div>
 </section>

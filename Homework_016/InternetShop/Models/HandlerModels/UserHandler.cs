@@ -13,11 +13,14 @@ namespace InternetShop.Models.HandlerModels
         Task<IdentityResult> SignUpUserAsync(string email, string password, int yearOfBirth, string role, bool signInAfterRegistration = true);
         Task<SignInResult> LoginAsync(string email, string password, bool rememberMe);
         Task LogoutAsync();
-        Task DeleteUserAsync(string? userName);
+        Task DeleteUserAsync(string? userName, bool signOutAfterRegistration = true);
+        Task<IdentityResult> EditUserAsync(string userId, string email, string userName, int yearOfBirth);
         Task<List<Message>> GetMessages();
         Task<string?> GetUserEmailByIdAsync(string userId);
+        Task<ApplicationUser?> GetUserByIdAsync(string userId);
         Task<string> SendMessageToManager(ClaimsPrincipal currentUser, string messageText);
-
+        Task<List<ApplicationUser>?> GetAllUsers();
+        Task<List<ApplicationUser>?> GetAllUsersInRoleAsync(string role);
     }
 
     public class UserHandler : IUserHandler
@@ -108,7 +111,7 @@ namespace InternetShop.Models.HandlerModels
         }
 
 
-        public async Task DeleteUserAsync(string? userName)
+        public async Task DeleteUserAsync(string? userName, bool signOutAfterRegistration = true)
         {
             if (userName is null) return;
 
@@ -116,16 +119,48 @@ namespace InternetShop.Models.HandlerModels
 
             if (user != null)
             {
-                await _signInManager.SignOutAsync();
+                if (signOutAfterRegistration)
+                {
+                    await _signInManager.SignOutAsync();
+                }
                 await _userManager.DeleteAsync(user);
             }
         }
 
+        public async Task<IdentityResult> EditUserAsync(string userId, string email, string userName, int yearOfBirth)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+                return IdentityResult.Failed(new IdentityError { Description = "User not found." });
+
+            user.Email = email;
+            user.UserName = userName;
+            user.YearOfBirth = yearOfBirth;
+
+            var result = await _userManager.UpdateAsync(user);
+            return result;
+        }
 
         public async Task<string?> GetUserEmailByIdAsync(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             return user?.Email;
+        }
+
+        public async Task<ApplicationUser?> GetUserByIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            return user;
+        }
+
+
+        public async Task<List<ApplicationUser>?> GetAllUsers() => await _userManager.Users.ToListAsync();
+
+        public async Task<List<ApplicationUser>?> GetAllUsersInRoleAsync(string role)
+        {
+            var usersInRole = await _userManager.GetUsersInRoleAsync(role);
+            return usersInRole.ToList();
         }
     }
 }
