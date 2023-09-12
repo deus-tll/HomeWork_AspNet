@@ -3,13 +3,14 @@ using InternetShop.Models.DataModels;
 using InternetShop.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 
 namespace InternetShop.Models.HandlerModels
 {
     public interface IUserHandler
     {
-        Task<IdentityResult> SignUpUserAsync(string email, string password, int yearOfBirth);
+        Task<IdentityResult> SignUpUserAsync(string email, string password, int yearOfBirth, string role, bool signInAfterRegistration = true);
         Task<SignInResult> LoginAsync(string email, string password, bool rememberMe);
         Task LogoutAsync();
         Task DeleteUserAsync(string? userName);
@@ -65,15 +66,29 @@ namespace InternetShop.Models.HandlerModels
         }
 
 
-        public async Task<IdentityResult> SignUpUserAsync(string email, string password, int yearOfBirth)
+        public async Task<IdentityResult> SignUpUserAsync(string email, string password, int yearOfBirth, string role, bool signInAfterRegistration = true)
         {
             var user = new ApplicationUser { UserName = email, Email = email, YearOfBirth = yearOfBirth };
             var result = await _userManager.CreateAsync(user, password);
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, "User");
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                await _userManager.AddToRoleAsync(user, role);
+
+                var claimResult = await _userManager.AddClaimAsync(user, new Claim("YearOfBirth", yearOfBirth.ToString()));
+
+                if (!claimResult.Succeeded)
+                {
+                    foreach (var error in claimResult.Errors)
+                    {
+                        _logger.LogError("Error adding claim \"{ClaimType}\" to user: {ErrorDescription}", "YearOfBirth", error.Description);
+                    }
+                }
+
+                if (signInAfterRegistration)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                }
             }
 
             return result;

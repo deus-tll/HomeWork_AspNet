@@ -151,7 +151,7 @@ namespace InternetShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _userHandler.SignUpUserAsync(model.Input.Email, model.Input.Password, model.Input.YearOfBirth);
+                var result = await _userHandler.SignUpUserAsync(model.Input.Email, model.Input.Password, model.Input.YearOfBirth, "User");
 
                 if (result.Succeeded)
                 {
