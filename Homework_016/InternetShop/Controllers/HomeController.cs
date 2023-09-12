@@ -124,6 +124,7 @@ namespace InternetShop.Controllers
 
 
         [HttpGet]
+        [Authorize(Policy = "MinimumAgePolicy")]
         public async Task<IActionResult> AboutProduct(int id)
         {
             var product = await _productHandler.GetProductAsync(id);
@@ -150,7 +151,7 @@ namespace InternetShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _userHandler.SignUpUserAsync(model.Input.Email, model.Input.Password);
+                var result = await _userHandler.SignUpUserAsync(model.Input.Email, model.Input.Password, model.Input.YearOfBirth);
 
                 if (result.Succeeded)
                 {

@@ -2,6 +2,14 @@
 
 namespace InternetShop.Models.ViewModels
 {
+    public class CurrentYearMaxValueAttribute : RangeAttribute
+    {
+        public CurrentYearMaxValueAttribute(int minYear) : base(minYear, DateTime.Now.Year)
+        {
+            ErrorMessage = $"Please enter a year between {minYear} and {DateTime.Now.Year}.";
+        }
+    }
+
     public class SignUpViewModel
     {
         public required InputModel Input { get; set; }
@@ -23,6 +31,11 @@ namespace InternetShop.Models.ViewModels
             [Display(Name = "Confirm Password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public required string ConfirmPassword { get; set; }
+
+            [Required(ErrorMessage = "The Year of Birth field is required.")]
+            [CurrentYearMaxValue(1900, ErrorMessage = "Please enter a valid year of birth.")]
+            [Display(Name = "Year of Birth")]
+            public required int YearOfBirth { get; set; }
         }
     }
 }

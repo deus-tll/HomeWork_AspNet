@@ -9,11 +9,11 @@ namespace InternetShop.Models.InitializeModels
         private const string ROLE_ADMIN = "Admin";
         private const string ROLE_USER = "User";
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
-        public UserInitializer(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public UserInitializer(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -37,7 +37,10 @@ namespace InternetShop.Models.InitializeModels
             var roleExists = await _roleManager.RoleExistsAsync(role);
 
             if (!roleExists)
-                await _roleManager.CreateAsync(new IdentityRole(role));
+            {
+                var newRole = new IdentityRole { Name = role };
+                await _roleManager.CreateAsync(newRole);
+            }
         }
 
 
@@ -53,10 +56,11 @@ namespace InternetShop.Models.InitializeModels
 
                 if (manager != null) continue;
 
-                manager = new IdentityUser
+                manager = new ApplicationUser
                 {
                     UserName = managerConfig.Email,
-                    Email = managerConfig.Email
+                    Email = managerConfig.Email,
+                    YearOfBirth = 1901
                 };
                 await _userManager.CreateAsync(manager, managerConfig.Password);
                 await _userManager.AddToRoleAsync(manager, role);

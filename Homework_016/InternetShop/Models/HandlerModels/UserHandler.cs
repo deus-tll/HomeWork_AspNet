@@ -9,7 +9,7 @@ namespace InternetShop.Models.HandlerModels
 {
     public interface IUserHandler
     {
-        Task<IdentityResult> SignUpUserAsync(string email, string password);
+        Task<IdentityResult> SignUpUserAsync(string email, string password, int yearOfBirth);
         Task<SignInResult> LoginAsync(string email, string password, bool rememberMe);
         Task LogoutAsync();
         Task DeleteUserAsync(string? userName);
@@ -21,13 +21,13 @@ namespace InternetShop.Models.HandlerModels
 
     public class UserHandler : IUserHandler
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly ApplicationContext _context;
         private readonly ILogger<UserHandler> _logger;
 
 
-        public UserHandler(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, ApplicationContext context, ILogger<UserHandler> logger)
+        public UserHandler(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, ApplicationContext context, ILogger<UserHandler> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -65,9 +65,9 @@ namespace InternetShop.Models.HandlerModels
         }
 
 
-        public async Task<IdentityResult> SignUpUserAsync(string email, string password)
+        public async Task<IdentityResult> SignUpUserAsync(string email, string password, int yearOfBirth)
         {
-            var user = new IdentityUser { UserName = email, Email = email };
+            var user = new ApplicationUser { UserName = email, Email = email, YearOfBirth = yearOfBirth };
             var result = await _userManager.CreateAsync(user, password);
 
             if (result.Succeeded)

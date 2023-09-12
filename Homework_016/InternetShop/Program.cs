@@ -2,6 +2,8 @@ using InternetShop.Filters;
 using InternetShop.Models;
 using InternetShop.Models.HandlerModels;
 using InternetShop.Models.InitializeModels;
+using InternetShop.Policies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -19,7 +21,7 @@ builder.Services.AddControllersWithViews(options =>
 
 builder.Services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>();
 builder.Services.AddAuthentication("MyCookieAuthenticationScheme").AddCookie("MyCookieAuthenticationScheme", options =>
 {
     options.LoginPath = new PathString("/Home/Account/Login");
@@ -37,6 +39,19 @@ builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
 });
+
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("MinimumAgePolicy", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireRole("User");
+        policy.Requirements.Add(new MinimumAgeRequirement(18));
+    });
+});
+
+builder.Services.AddSingleton<IAuthorizationHandler, MinimumAgeHandler>();
 
 
 const string dirLogsPath = "Logs";
@@ -67,7 +82,7 @@ using (var scope = app.Services.CreateScope())
     var dbContext = services.GetRequiredService<ApplicationContext>();
     await dbContext.Database.MigrateAsync();
 
-    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
     var config = services.GetRequiredService<IConfiguration>();
 
