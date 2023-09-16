@@ -3,7 +3,6 @@ using Practice.Models;
 using Practice.Models.HandlerModels;
 using Practice.Models.ViewModels;
 using System.Diagnostics;
-using System.Reflection;
 
 namespace Practice.Controllers
 {
@@ -89,7 +88,7 @@ namespace Practice.Controllers
 
         private MainContentViewModel CreateMainContentViewModel(string path)
         {
-            MainContentViewModel viewModel = new MainContentViewModel
+            MainContentViewModel viewModel = new()
             {
                 ContentBlocks = _contentHandler.GetContentBlocks(path)
             };

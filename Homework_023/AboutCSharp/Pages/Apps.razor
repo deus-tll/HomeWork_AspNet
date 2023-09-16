@@ -1,0 +1,47 @@
+﻿@page "/apps"
+@inject ContentHandlerService ContentService
+
+<PageTitle>@_title</PageTitle>
+
+<section class="main-section">
+    <div class="container">
+
+        <div class="section-title">
+            <h2>@_title</h2>
+        </div>
+
+        <div class="row">
+            <h3>What apps are made with C#?</h3>
+
+            <p>
+                Here are a handful of programs and applications written in C# that demonstrate the language’s diversity and reliability:
+            </p>
+
+            <br class="line-break">
+
+            @if (_listRefsViewModel?.RefBlocks is not null)
+            {
+                @foreach (var refBlock in _listRefsViewModel.RefBlocks)
+                {
+                    <ul>
+                        <li><a href="@refBlock.Ref">@refBlock.Name</a></li>
+                    </ul>
+
+                    <br class="line-break">
+                }
+            }
+        </div>
+
+    </div>
+</section>
+
+
+@code {
+    private ListRefsViewModel? _listRefsViewModel;
+    private string _title = "Apps";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _listRefsViewModel = await ContentService.CreateListRefsViewModelAsync(ContentHandlerService.NecessaryFiles.APPS_CONTENT_PATH);
+    }
+}

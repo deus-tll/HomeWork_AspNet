@@ -31,7 +31,7 @@ namespace InternetShop.Controllers
         {
             List<Product> products;
             ProductFilter? filter = null;
-
+            
             if (TempData.ContainsKey("Filter"))
             {
                 var filterJson = TempData["Filter"] as string;

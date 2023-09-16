@@ -1,0 +1,49 @@
+﻿@page "/makereview"
+@inject ContentHandlerService ContentService
+@inject NavigationManager NavigationManager
+
+<PageTitle>@_title</PageTitle>
+
+<section class="main-section">
+    <div class="container">
+        <div class="section-title">
+            <h2>Make Review About Us</h2>
+        </div>
+        <div class="row">
+            <h3>Make review about us, ask some questions, or just leave a message</h3>
+            <br class="line-break">
+            <EditForm Model="_review" OnValidSubmit="SubmitReview">
+                <DataAnnotationsValidator />
+                <div class="row">
+                    <label for="Email">Email:</label>
+                    <InputText class="form-control form-control-sm" id="Email" @bind-Value="_review.Email" />
+                    <ValidationMessage For="@(() => _review.Email)" />
+                </div>
+                <br class="line-break">
+                <div class="row">
+                    <label for="Text">Your review/message/questions:</label>
+                    <InputTextArea class="form-control form-control-sm" id="Text" @bind-Value="_review.Text" rows="4" />
+                    <ValidationMessage For="@(() => _review.Text)" />
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center p-lg-3">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div>
+            </EditForm>
+        </div>
+    </div>
+</section>
+
+@code {
+    private Review _review = new();
+    private string _title = "Make Review About Us";
+
+    private void SubmitReview()
+    {
+        if (_review is null) return;
+
+        ContentService.SaveMessageToFile(_review);
+        NavigationManager.NavigateTo("");
+    }
+}

@@ -1,6 +1,4 @@
 using Microsoft.Extensions.FileProviders;
-using Task_1.controllers;
-using Task_2.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();

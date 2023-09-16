@@ -1,0 +1,17 @@
+﻿@page "/advantages"
+@inject ContentHandlerService ContentService
+
+<PageTitle>@_title</PageTitle>
+
+<ShowContent MainContentViewModel="_mainContentViewModel" SectionTitle="@_title" />
+
+
+@code {
+    private MainContentViewModel? _mainContentViewModel;
+    private string _title = "Advantages";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _mainContentViewModel = await ContentService.CreateMainContentViewModelAsync(ContentHandlerService.NecessaryFiles.ADVANTAGES_CONTENT_PATH);
+    }
+}

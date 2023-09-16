@@ -1,0 +1,17 @@
+﻿@page "/"
+@inject ContentHandlerService ContentService
+
+<PageTitle>@_title</PageTitle>
+
+<ShowContent MainContentViewModel="_mainContentViewModel" SectionTitle="@_title" />
+
+
+@code {
+    private MainContentViewModel? _mainContentViewModel;
+    private string _title = "Home";
+
+    protected override async Task OnInitializedAsync()
+    {
+        _mainContentViewModel = await ContentService.CreateMainContentViewModelAsync(ContentHandlerService.NecessaryFiles.INDEX_CONTENT_PATH);
+    }
+}
