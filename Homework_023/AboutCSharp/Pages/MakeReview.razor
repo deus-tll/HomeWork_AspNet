@@ -1,6 +1,5 @@
 ﻿@page "/makereview"
 @inject ContentHandlerService ContentService
-@inject NavigationManager NavigationManager
 
 <PageTitle>@_title</PageTitle>
 
@@ -31,6 +30,13 @@
                     </div>
                 </div>
             </EditForm>
+
+            @if (_isSubmitted)
+            {
+                <div class="alert alert-success">
+                    Your review has been submitted successfully!
+                </div>
+            }
         </div>
     </div>
 </section>
@@ -38,12 +44,14 @@
 @code {
     private Review _review = new();
     private string _title = "Make Review About Us";
+    private bool _isSubmitted = false;
 
     private void SubmitReview()
     {
         if (_review is null) return;
 
         ContentService.SaveMessageToFile(_review);
-        NavigationManager.NavigateTo("");
+        _isSubmitted = true;
+        _review.Text = "";
     }
 }
