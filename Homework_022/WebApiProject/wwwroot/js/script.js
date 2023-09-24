@@ -27,9 +27,9 @@
         if (response.ok === true) {
             const person = await response.json();
             const form = document.forms[formName];
-            form.elements["id"].value = user.id;
-            form.elements["name"].value = user.name;
-            form.elements["age"].value = user.age;
+            form.elements["id"].value = person.id;
+            form.elements["name"].value = person.name;
+            form.elements["age"].value = person.age;
         }
     }
 
