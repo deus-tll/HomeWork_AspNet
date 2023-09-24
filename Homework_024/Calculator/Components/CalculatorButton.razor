@@ -1,0 +1,15 @@
+﻿<button class="calculator-button" @onclick="ButtonClick">@Label</button>
+
+@code {
+    [Parameter]
+    [EditorRequired]
+    public string Label { get; set; } = string.Empty;
+
+    [Parameter]
+    public EventCallback<string> OnButtonClick { get; set; }
+
+    private async Task ButtonClick()
+    {
+        await OnButtonClick.InvokeAsync(Label);
+    }
+}

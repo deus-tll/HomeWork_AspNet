@@ -1,0 +1,58 @@
+﻿<div class="container">
+    <CalculatorScreen DisplayText="@displayText" />
+    <div class="calculator-buttons">
+        @for (int i = 1; i <= 9; i++)
+        {
+            <CalculatorButton Label="@i.ToString()" OnButtonClick="HandleButtonClick" />
+        }
+        <CalculatorButton Label="0" OnButtonClick="HandleButtonClick" />
+        <CalculatorButton Label="+" OnButtonClick="HandleButtonClick" />
+        <CalculatorButton Label="-" OnButtonClick="HandleButtonClick" />
+        <CalculatorButton Label="*" OnButtonClick="HandleButtonClick" />
+        <CalculatorButton Label="/" OnButtonClick="HandleButtonClick" />
+        <CalculatorButton Label="=" OnButtonClick="HandleButtonClick" />
+        <CalculatorButton Label="C" OnButtonClick="HandleButtonClick" />
+    </div>
+</div>
+
+@code {
+    private string displayText = "";
+
+    private void HandleButtonClick(string buttonLabel)
+    {
+        if (buttonLabel == "=")
+        {
+            try
+            {
+                displayText = CalculateResult(displayText);
+            }
+            catch
+            {
+                displayText = "Error";
+            }
+        }
+        else if (buttonLabel == "C")
+        {
+            displayText = "";
+        }
+        else
+        {
+            displayText += buttonLabel;
+        }
+    }
+
+    private string CalculateResult(string expression)
+    {
+        try
+        {
+            DataTable dataTable = new DataTable();
+            var result = dataTable.Compute(expression, "");
+
+            return result.ToString();
+        }
+        catch (Exception ex)
+        {
+            return "Error: " + ex.Message;
+        }
+    }
+}
