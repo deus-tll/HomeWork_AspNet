@@ -207,14 +207,11 @@ namespace Calculator.Models
         public void RecallMemory()
         {
             FirstNumber = Memory;
+
             if (Action == "")
-            {
                 DisplayText = FirstNumber;
-            }
             else
-            {
                 DisplayText = SecondNumber;
-            }
         }
 
         public void AddToMemory()
@@ -222,22 +219,14 @@ namespace Calculator.Models
             if (Action == "")
             {
                 if (decimal.TryParse(FirstNumber, out decimal firstNumericValue))
-                {
                     if (decimal.TryParse(Memory, out decimal memoryValue))
-                    {
                         Memory = (memoryValue + firstNumericValue).ToString();
-                    }
-                }
             }
             else
             {
                 if (decimal.TryParse(SecondNumber, out decimal secondNumericValue))
-                {
                     if (decimal.TryParse(Memory, out decimal memoryValue))
-                    {
                         Memory = (memoryValue + secondNumericValue).ToString();
-                    }
-                }
             }
         }
 
@@ -246,41 +235,25 @@ namespace Calculator.Models
             if (Action == "")
             {
                 if (decimal.TryParse(FirstNumber, out decimal firstNumericValue))
-                {
                     if (decimal.TryParse(Memory, out decimal memoryValue))
-                    {
                         Memory = (memoryValue - firstNumericValue).ToString();
-                    }
-                }
             }
             else
             {
                 if (decimal.TryParse(SecondNumber, out decimal secondNumericValue))
-                {
                     if (decimal.TryParse(Memory, out decimal memoryValue))
-                    {
                         Memory = (memoryValue - secondNumericValue).ToString();
-                    }
-                }
             }
         }
 
         public void StoreInMemory()
         {
             if (Action == "")
-            {
                 if (decimal.TryParse(FirstNumber, out decimal firstNumericValue))
-                {
                     Memory = firstNumericValue.ToString();
-                }
-            }
             else
-            {
                 if (decimal.TryParse(SecondNumber, out decimal secondNumericValue))
-                {
                     Memory = secondNumericValue.ToString();
-                }
-            }
         }
     }
 }
