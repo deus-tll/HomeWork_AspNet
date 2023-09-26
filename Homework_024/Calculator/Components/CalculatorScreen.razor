@@ -1,8 +1,36 @@
 ﻿<div class="calculator-screen">
-    @DisplayText
+    <div class="row w-100 text-end">
+        @if (FirstNumber is not "" && Action is not "")
+        {
+            <div class="gray-text small-text">
+                @FirstNumber @Action @SecondNumber =
+            </div>
+        }
+        else
+        {
+            <div class="gray-text small-text">
+                @FirstNumber =
+            </div>
+        }
+    </div>
+    <div class="row w-100 text-end">
+        <div>@Result</div>
+    </div>
 </div>
 
 @code {
     [Parameter]
-    public string DisplayText { get; set; } = string.Empty;
+    public string Result { get; set; } = "";
+
+    [Parameter]
+    public string FirstNumber { get; set; } = "0";
+
+    [Parameter]
+    public string Action { get; set; } = "";
+
+    [Parameter]
+    public string SecondNumber { get; set; } = "0";
+
+    [Parameter]
+    public string Memory { get; set; } = "0";
 }

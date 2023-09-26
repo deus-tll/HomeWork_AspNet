@@ -1,58 +1,190 @@
-﻿<div class="container">
-    <CalculatorScreen DisplayText="@displayText" />
-    <div class="calculator-buttons">
-        @for (int i = 1; i <= 9; i++)
-        {
-            <CalculatorButton Label="@i.ToString()" OnButtonClick="HandleButtonClick" />
-        }
-        <CalculatorButton Label="0" OnButtonClick="HandleButtonClick" />
-        <CalculatorButton Label="+" OnButtonClick="HandleButtonClick" />
-        <CalculatorButton Label="-" OnButtonClick="HandleButtonClick" />
-        <CalculatorButton Label="*" OnButtonClick="HandleButtonClick" />
-        <CalculatorButton Label="/" OnButtonClick="HandleButtonClick" />
-        <CalculatorButton Label="=" OnButtonClick="HandleButtonClick" />
-        <CalculatorButton Label="C" OnButtonClick="HandleButtonClick" />
+﻿@using Calculator.Models;
+<div class="container-fluid p-0 calculator d-flex justify-content-center align-items-center">
+    <div>
+        <div class="row col-lg-12 m-0">
+            <div class="btn-secondary">
+                Memory: @_calculator.Memory
+            </div>
+            <CalculatorScreen FirstNumber="@_calculator.FirstNumber" Action="@_calculator.Action" SecondNumber="@_calculator.SecondNumber" Result="@_calculator.DisplayText" />
+        </div>
+        <div class="row col-lg-12 m-0">
+            <div class="col-lg-2 p-0">
+                <CalculatorButton Label="MC" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-2 p-0">
+                <CalculatorButton Label="MR" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-2 p-0">
+                <CalculatorButton Label="MS" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="M+" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="M-" OnButtonClick="HandleButtonClick" />
+            </div>
+
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="%" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="CE" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="C" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="⌫" OnButtonClick="HandleButtonClick" />
+            </div>
+
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="1/x" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="x²" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="²√x" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="/" OnButtonClick="HandleButtonClick" />
+            </div>
+
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="7" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="8" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="9" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="*" OnButtonClick="HandleButtonClick" />
+            </div>
+
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="4" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="5" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="6" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="-" OnButtonClick="HandleButtonClick" />
+            </div>
+
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="1" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="2" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="3" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="+" OnButtonClick="HandleButtonClick" />
+            </div>
+
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="+/-" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="0" OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="." OnButtonClick="HandleButtonClick" />
+            </div>
+            <div class="col-lg-3 p-0">
+                <CalculatorButton Label="=" OnButtonClick="HandleButtonClick" />
+            </div>
+        </div>
     </div>
 </div>
 
 @code {
-    private string displayText = "";
+    private CalculatorModel _calculator = new();
+
 
     private void HandleButtonClick(string buttonLabel)
     {
-        if (buttonLabel == "=")
+        if (CalculatorModel.IsNumeric(buttonLabel) || buttonLabel is ".")
         {
-            try
+            _calculator.UpdateNumber(buttonLabel);
+        }
+        else if (buttonLabel == "=")
+        {
+            if (_calculator.TryCalculateResult())
             {
-                displayText = CalculateResult(displayText);
-            }
-            catch
-            {
-                displayText = "Error";
+                _calculator.ClickedEqual = true;
             }
         }
         else if (buttonLabel == "C")
         {
-            displayText = "";
+            _calculator.ResetCalculator();
+        }
+        else if (buttonLabel == "CE")
+        {
+            _calculator.ClearEntry();
+        }
+        else if (buttonLabel == "⌫")
+        {
+            _calculator.DeleteDigit();
+        }
+        else if (buttonLabel == "²√x")
+        {
+            _calculator.CalculateSquareRootAction();
+        }
+        else if (buttonLabel == "x²")
+        {
+            _calculator.CalculateSquareAction();
+        }
+        else if (buttonLabel == "1/x")
+        {
+            _calculator.CalculateInverseAction();
+        }
+        else if (buttonLabel == "+/-")
+        {
+            _calculator.ToggleSignAction();
+        }
+        else if (buttonLabel == "MC")
+        {
+            _calculator.ClearMemory();
+        }
+        else if (buttonLabel == "MR")
+        {
+            _calculator.RecallMemory();
+        }
+        else if (buttonLabel == "M+")
+        {
+            _calculator.AddToMemory();
+        }
+        else if (buttonLabel == "M-")
+        {
+            _calculator.SubtractFromMemory();
+        }
+        else if (buttonLabel == "MS")
+        {
+            _calculator.StoreInMemory();
         }
         else
         {
-            displayText += buttonLabel;
-        }
-    }
-
-    private string CalculateResult(string expression)
-    {
-        try
-        {
-            DataTable dataTable = new DataTable();
-            var result = dataTable.Compute(expression, "");
-
-            return result.ToString();
-        }
-        catch (Exception ex)
-        {
-            return "Error: " + ex.Message;
+            if (string.IsNullOrEmpty(_calculator.Action))
+            {
+                _calculator.Action = buttonLabel;
+            }
+            else
+            {
+                if (_calculator.TryCalculateResult())
+                {
+                    _calculator.SecondNumber = "";
+                    _calculator.DisplayText = _calculator.FirstNumber;
+                }
+                _calculator.Action = buttonLabel;
+            }
         }
     }
 }
