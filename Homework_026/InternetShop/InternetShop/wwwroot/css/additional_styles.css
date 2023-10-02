@@ -1,0 +1,38 @@
+﻿.custom-container-discount {
+    background: #D19C97;
+    left: 1.5%;
+    top: 1.5%;
+    width: 16%;
+    height: 16%;
+    z-index: 100;
+    border-radius: 6px;
+}
+
+.custom-text-discount {
+    margin: 0;
+    font-size: 0.65vw;
+}
+
+.card-header.product-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-limitations {
+    max-height: 410px;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+@media (max-width: 990px) {
+    .custom-text-discount {
+        font-size: 1.8vw;
+    }
+}
+
+@media (max-width: 767px) {
+    .custom-text-discount {
+        font-size: 2.5vw;
+    }
+}

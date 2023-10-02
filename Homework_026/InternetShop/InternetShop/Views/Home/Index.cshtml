@@ -1,0 +1,126 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@* Homepage carousel *@
+<div class="container-fluid" style="width: 95%;">
+    <div id="header-carousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+
+            @Html.CreateCarouselItem("img/homepage_slider/7.jpg", "10% Off Your First Order", "Reasonable Price", true)
+
+            @Html.CreateCarouselItem("img/homepage_slider/1.jpg", "Bedroom Furniture", "Find Comfort That Suits You")
+
+            @Html.CreateCarouselItem("img/homepage_slider/2.jpg", "15% Off On Any Gift For Birthday", "Find Everything You Need For Your Family")
+
+            @Html.CreateCarouselItem("img/homepage_slider/3.jpg", "Men Collection 2023", "New Season")
+            
+            @Html.CreateCarouselItem("img/homepage_slider/4.jpg", "Absolutely Fresh", "Delicious Food To Fit Your Lifestyle & Health.")
+
+            @Html.CreateCarouselItem("img/homepage_slider/8.jpg", "30% Off On Electronics", "Find Top Brands")
+
+            @Html.CreateCarouselItem("img/homepage_slider/11.jpg", "Women Collection 2023", "New Season")
+        </div>
+        <a class="carousel-control-prev" href="#header-carousel" data-slide="prev">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-prev-icon mb-n2"></span>
+            </div>
+        </a>
+        <a class="carousel-control-next" href="#header-carousel" data-slide="next">
+            <div class="btn btn-dark" style="width: 45px; height: 45px;">
+                <span class="carousel-control-next-icon mb-n2"></span>
+            </div>
+        </a>
+    </div>
+</div>
+@* Homepage carousel *@
+
+@* Why choose us *@
+<div class="container-fluid mt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Why choose us</span></h2>
+    </div>
+    <section class="mt-5" style="background-color: #f5f5f5;">
+        <div class="container text-dark pt-3">
+            <div class="row mb-5 mt-4">
+                <div class="col-lg-4 col-md-12">
+                    @Html.CreateChoosingReason("Reasonable prices", "fa-dollar-sign")
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    @Html.CreateChoosingReason("Best quality", "fa-star")
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    @Html.CreateChoosingReason("Worldwide shipping", "fa-plane")
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    @Html.CreateChoosingReason("Customer satisfaction", "fa-users")
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    @Html.CreateChoosingReason("24/7 Support", "fa-phone-volume")
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    @Html.CreateChoosingReason("Thousands of items", "fa-box")
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+@* Why choose us *@
+
+@* Products End *@
+<div class="container-fluid pt-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Trandy Products</span></h2>
+    </div>
+    <div class="row px-xl-5 pb-3">
+
+        @foreach (var product in Model.Products)
+        {
+            <div class="col-lg-3 col-md-6 col-sm-12 p-4">
+                @Html.CreateProductItem(product, User)
+            </div>
+        }
+    </div>
+</div>
+@* Products End *@
+
+
+
+@* Our Partners *@
+<div class="container-fluid py-5">
+    <div class="text-center mb-4">
+        <h2 class="section-title px-5"><span class="px-2">Our Partners</span></h2>
+    </div>
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="owl-carousel vendor-carousel">
+                <div class="vendor-item border p-4">
+                    <img src="https://logo-8fa5.kxcdn.com/wp-content/uploads/2015/05/workapply-640x517.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="https://logo-8fa5.kxcdn.com/wp-content/uploads/2015/04/International-Hearts-free-logo.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="https://logo-8fa5.kxcdn.com/wp-content/uploads/2015/05/Atomized-Media-free-logo.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="https://logo-8fa5.kxcdn.com/wp-content/uploads/2015/04/TechCom-logo-design.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="https://logo-8fa5.kxcdn.com/wp-content/uploads/2016/07/FuzionSource_B.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="https://logo-8fa5.kxcdn.com/wp-content/uploads/2016/07/Data-trade-logo-template_B-300x242.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="https://logo-8fa5.kxcdn.com/wp-content/uploads/2016/07/Blue-Phlare_B-300x242.jpg" alt="">
+                </div>
+                <div class="vendor-item border p-4">
+                    <img src="https://i2.wp.com/free-psd-templates.com/wp-content/uploads/2017/05/fuityfreelogo_B-768x620.jpg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* Our Partners *@

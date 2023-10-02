@@ -1,0 +1,118 @@
+﻿@model ShopViewModel
+@{
+    ViewData["Title"] = "Shop";
+}
+
+@* Shop Start *@
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        @* Shop Sidebar Start *@
+        <div class="col-lg-2 col-md-12">
+            @* Price Start *@
+            <div class="border-bottom mb-4 pb-4">
+                <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
+                <form>
+                    <div class="align-items-center justify-content-between mb-3">
+                        <div>
+                            <div class="row">
+                                <label for="min-price">Min price</label>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <input type="number" class="form-control" id="min-price">
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="row">
+                                <label for="max-price">Max price</label>
+                            </div>
+                            <div class="row">
+                                <input type="number" class="form-control" id="max-price">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            @* Price End *@
+            @* Brand Start *@
+            <div class="border-bottom mb-4 pb-4 list-limitations">
+                <h5 class="font-weight-semi-bold mb-4">Filter by brand</h5>
+                <form>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="brand-all">
+                        <label class="custom-control-label" for="brand-all">All Brands</label>
+                        <span class="badge border font-weight-normal">@Model.AllProductsInBrands</span>
+                    </div>
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="brand-@brand.Brand.Id">
+                            <label class="custom-control-label" for="brand-@brand.Brand.Id">@brand.Brand.Name</label>
+                            <span class="badge border font-weight-normal">@brand.Count</span>
+                        </div>
+                    }
+                </form>
+            </div>
+            @* Brand End *@
+            @* Size Start *@
+            <div class="mb-5 list-limitations">
+                <h5 class="font-weight-semi-bold mb-4">Filter by categories</h5>
+                <form>
+                    <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                        <input type="checkbox" class="custom-control-input" checked id="category-all">
+                        <label class="custom-control-label" for="category-all">All Brands</label>
+                        <span class="badge border font-weight-normal">@Model.AllProductsInCategories</span>
+                    </div>
+                    @foreach (var category in Model.Categories)
+                    {
+                        <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
+                            <input type="checkbox" class="custom-control-input" id="category-@category.Category.Id">
+                            <label class="custom-control-label" for="category-@category.Category.Id">@category.Category.Name</label>
+                            <span class="badge border font-weight-normal">@category.Count</span>
+                        </div>
+                    }
+                </form>
+            </div>
+            @* Size End *@
+        </div>
+        @* Shop Sidebar End *@
+        @* Shop Product Start *@
+        <div class="col-lg-10 col-md-12">
+            <div class="row pb-3">
+                <div class="col-12 pb-1">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <form action="">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search by name">
+                                <div class="input-group-append">
+                                    <span class="input-group-text bg-transparent text-primary">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="dropdown ml-4">
+                            <button class="btn border dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                Sort by
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-bs-labelledby="triggerId">
+                                <a class="dropdown-item" href="#">Latest</a>
+                                <a class="dropdown-item" href="#">Popularity</a>
+                                <a class="dropdown-item" href="#">Best Rating</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @foreach (var product in Model.Products)
+                {
+                    <div class="col-lg-3 col-md-6 col-sm-12 p-4">
+                        @Html.CreateProductItem(product, User)
+                    </div>
+                }
+            </div>
+        </div>
+        @* Shop Product End *@
+    </div>
+</div>
+@* Shop End *@
