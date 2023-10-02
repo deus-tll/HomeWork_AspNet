@@ -1,4 +1,5 @@
-﻿@{
+﻿@model ContactViewModel
+@{
     ViewData["Title"] = "Contact";
 }
 
@@ -59,14 +60,16 @@
                     <div class="form-group mt-3">
                         <textarea class="form-control" name="message" rows="5" placeholder="Повідомлення" required></textarea>
                     </div>
-                    <div class="my-3">
-                        <div class="loading">Завантаження</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Ваше повідомлення було відправлено. Дякую!</div>
-                    </div>
+
+                    @if (ViewData["IsSent"] is bool isSent && isSent)
+                    {
+                        <div class="my-3">
+                            <div class="sent-message">Ваше повідомлення було відправлено. Дякую!</div>
+                        </div>
+                    }
+
                     <div class="text-center"><button type="submit">Відправити повідомлення</button></div>
                 </form>
-
             </div>
 
         </div>

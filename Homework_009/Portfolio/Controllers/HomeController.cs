@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Portfolio.Models.ControllerHandlers;
 using Portfolio.Models.ViewModels;
+using System.Net.Mail;
+using System.Net;
 
 namespace Portfolio.Controllers
 {
@@ -13,13 +15,15 @@ namespace Portfolio.Controllers
         private readonly CoursesViewModel _coursesViewModel;
         private readonly PortfolioViewModel _portfolioViewModel;
 
+        private readonly IConfiguration _configuration;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IConfiguration configuration)
         {
             _logger = logger;
             _handler = new HomeControllerHandler(logger);
             _coursesViewModel = new();
             _portfolioViewModel = new();
+            _configuration = configuration;
         }
 
 
@@ -61,7 +65,60 @@ namespace Portfolio.Controllers
         [HttpGet]
         public IActionResult Contact()
         {
+            if (TempData.ContainsKey("IsSent") && (bool)TempData["IsSent"])
+            {
+                ViewData["IsSent"] = true;
+                TempData.Remove("IsSent");
+            }
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Contact(ContactViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+
+                model.IsSent = false;
+
+                string name = model.Name;
+                string email = model.Email;
+                string procedure = model.Procedure;
+                string message = model.Message;
+
+                string? smtpServer = _configuration["SmtpSettings:SmtpServer"];
+                int.TryParse(_configuration["SmtpSettings:Port"], out int smtpPort);
+                string? smtpUsername = _configuration["SmtpSettings:Username"];
+                string? smtpPassword = _configuration["SmtpSettings:Password"];
+                string? recipient = _configuration["MyData:Email"];
+
+                using (var client = new SmtpClient(smtpServer, smtpPort))
+                {
+                    client.Credentials = new NetworkCredential(smtpUsername, smtpPassword);
+                    client.EnableSsl = true;
+
+                    var mailMessage = new MailMessage
+                    {
+                        From = new MailAddress(email),
+                        Subject = $"Нове повідомлення від {name}",
+                        Body = $"Ім'я: {name}\nЕлектронна пошта: {email}\nВид процедури: {procedure}\nПовідомлення: {message}"
+                    };
+
+                    if (recipient is not null)
+                    {
+                        mailMessage.To.Add(recipient);
+
+                        await client.SendMailAsync(mailMessage);
+
+                        TempData["IsSent"] = true;
+                    }
+                }
+
+                return RedirectToAction("Contact");
+            }
+
+            return View(model);
         }
 
 
